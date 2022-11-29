@@ -79,8 +79,7 @@ public class GroupCalendar {
 	@ResponseBody
 	@RequestMapping(value = "/calDelete")
 	public String calDelete(int seq_group_cal) throws Exception {
-		System.out.println("삭제 페이지 입니다");
-		System.out.println(seq_group_cal);
+
 		int rs = service.calDelete(seq_group_cal);
 		if (rs > 0) return "success";
 		else return "fail";

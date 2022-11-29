@@ -1,6 +1,7 @@
 package com.kiri.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,9 @@ public class Board_CommentDAO {
 	}
 	
 	// 댓글 프로필
-	public String getProfileImg(String user_email) throws Exception{
-		return session.selectOne("commentMapper.getProfileImg", user_email);
-	}
+//	public List<String> getProfileImg(int seq_board) throws Exception{
+//		return session.selectList("commentMapper.getProfileImg", seq_board);
+//	}
 	
 	// 댓글 등록
 	public int write(Board_CommentDTO dto) throws Exception{

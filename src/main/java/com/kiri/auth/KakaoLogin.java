@@ -27,7 +27,7 @@ import com.kiri.utills.SecurityInfo;
 public class KakaoLogin {
 	private final static String kakaoClientId = SecurityInfo.kakaoId;
 	private final static String kakaoClientSecret = SecurityInfo.kakaoSecret;
-	private final static String kakaoRedirectUri = "http://localhost:8090/auth/kakaoCallback"; 
+	private final static String kakaoRedirectUri = "http://192.168.20.21/auth/kakaoCallback"; 
 	private final static String sessionState = "kakao_oauth_state";
 	private final static String kakaoProfileApiUri = "https://kapi.kakao.com/v2/user/me";
 

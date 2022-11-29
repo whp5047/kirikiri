@@ -401,21 +401,21 @@ footer.footer {
 
 				<div class="row mt-4">
 					<textarea id="summernote" name="board_content"></textarea>
-				</div>
-
-			</div>
-
-			<div class="row my-4 justify-content-center align-items-center"
-				id="bottom">
-				<div class="col-auto">
-					<button type="button" id="cancelBtn" class="btn btn-light">취소</button>
-				</div>
-				<div class="col-auto">
-					<button type="button" id="submitBtn" class="btn"
-						style="background-color: #e6f6ff;">작성 완료</button>
-				</div>
-			</div>
-		</form>
+					
+		        </div>
+		        <sup>(<span id="nowByte">0</span>/2500bytes)</sup>
+	        
+	        </div>
+	        
+	        <div class="row my-4 justify-content-center align-items-center" id="bottom">
+	            <div class="col-auto">
+	                <button type="button" id="cancelBtn" class="btn btn-light">취소</button>
+	            </div>
+	            <div class="col-auto">
+	                <button type="button" id="submitBtn" class="btn" style="background-color: #e6f6ff;">작성 완료</button>
+	            </div>
+	        </div>
+        </form>
 	</div>
 
 	<!-- Footer-->
@@ -498,7 +498,7 @@ footer.footer {
 				  maxHeight: 550, // 최대 높이
 				  focus: true, // 에디터 로딩후 포커스를 맞출지 여부
 				  lang: "ko-KR", // 한글 설정
-				  placeholder: '최대 1000자까지 작성 가능합니다.', //placeholder 설정
+				  placeholder: '최대 2500byte까지 작성 가능합니다.', //placeholder 설정
 				  toolbar: [
 						// [groupName, [list of button]]
 						['fontname', ['fontname']], // 글꼴
@@ -529,9 +529,29 @@ footer.footer {
 						  for (var i = files.length - 1; i >= 0; i--) {
 							  uploadSummernoteImageFile(files[i], this);
 						  }
+					  }/* , onChange : function(contents, $editable){
+						 if($(".note-editable").html().length >= 10){
+							 alert("넘침!");
+						 }
+						 setContentsLength(contents, 0);
+					  } */
+					  , onKeyup : function(e){
+						  /* let length = $(".note-editable").text().length;
+						  console.log(length);
+						  if(length >= 10){
+							  e.preventDefault();
+						  } */
+						  fn_checkByte(this); // 글자수 바이트 체크
+					  }, onKeydown : function(e){
+						  /* let length = $(".note-editable").text().length;
+						  if(length >= 10){
+							  e.preventDefault();
+						  } */
+						  fn_checkByte(this); // 글자수 바이트 체크
 					  }
 				  }
 			});
+			
 			
 			// 주기적으로 감지할 대상 요소 선정
 			let target = document.querySelector(".note-editable");
@@ -551,7 +571,7 @@ footer.footer {
 							let img = mutation.removedNodes[0].src;
 							//console.log("img" + img);
 							//console.log("src : " + src);
-							let src = decodeURIComponent(img.replace("http://localhost/boardFile/", ""));
+							let src = decodeURIComponent(img.replace("http://192.168.20.21/boardFile/", ""));
 							console.log(src);
 							$.ajax({
 								url : "/board/delImg"
@@ -570,6 +590,65 @@ footer.footer {
 			// 감지 시작
 			observer.observe(target, config);
 		});
+		
+		//textarea 바이트 수 체크하는 함수
+		function fn_checkByte(obj){
+			const maxByte = 2500; //최대 100바이트
+			const text_val = obj.value; //입력한 문자
+			const text_len = text_val.length; //입력한 문자수
+			let totalByte=0;
+
+			for(let i=0; i<text_len; i++){
+				const each_char = text_val.charAt(i);
+				const uni_char = escape(each_char); //유니코드 형식으로 변환
+				if(uni_char.length>4){
+					// 한글 : 2Byte
+					totalByte += 2;
+				}else{
+					// 영문,숫자,특수문자 : 1Byte
+					totalByte += 1;
+				}
+			}
+			if(totalByte>maxByte){
+				document.getElementById("nowByte").innerText = totalByte;
+				document.getElementById("nowByte").style.color = "red";
+			}else{
+				document.getElementById("nowByte").innerText = totalByte;
+				document.getElementById("nowByte").style.color = "green";
+			}
+		}
+		
+/* 		// 태그 / 줄바꿈 / 공백을 제거하고 텍스트 글자수만 가져옴
+		function setContentsLength(str, index){
+			let status = false;
+			let textCnt = 0; // 총 글자수
+			let maxCnt = 50; // 최대 글자수
+			let editorText = f_SkipTags_html(str); // 에디터에서 태그를 삭제하고 내용만 가져오기
+			editorText = editorText.replace(/\s/gi, ""); // 줄바꿈 제거
+			editorText = editorText.replace(/&nbsp;/gi, ""); // 공백 제거
+			
+			textCnt = editorText.length;
+			if(maxCnt > 0){
+				if(textCnt > maxCnt){
+					status = true;
+				}
+			}
+			if(status){
+				let msg = "등록 오류: 글자수는 최대" + maxCnt + "까지 등록이 가능합니다. 현재 글자수 : " + textCnt + " 자";
+				console.log(msg);
+			}
+		}
+		
+		// 에디터 내용 텍스트 제거
+		function f_SkipTags_html(input, allowed) {
+			// 허용할 태그는 다음과 같이 소문자로 넘겨받습니다. (<a><b><c>)
+			allowed = (((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join('');
+			let tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
+			let commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+			return input.replace(commentsAndPhpTags, '').replace(tags, function ($0, $1) {
+		        return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
+		    });
+		} */
 		
 		
 		// summernote 이미지 업로드 function
@@ -594,6 +673,10 @@ footer.footer {
 		let imgArr = new Array();
 		// 작성 완료 버튼
 		$("#submitBtn").on("click", function(){
+			if($("#nowByte").html() >= 2500){
+				alert("최대 바이트 허용 수를 초과하여 글을 등록할 수 없습니다.");
+				return;
+			}
 			
 			if($("#title").val() === ""){
 				Swal.fire({

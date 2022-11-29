@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>모임 일정</title>
 <!-- kakaoMap -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fef0f2eae29928e7e7027600e1cf8f7d&libraries=services"></script>
 <!-- swal -->
@@ -107,6 +107,7 @@ body {
 
 * {
 	box-sizing: border-box;
+	font-family : 'MICEGothic Bold';
 }
 
 /* header */
@@ -657,7 +658,7 @@ footer.footer {
 											<input type="text" class="form-control keyword"
 												id="partyLocation" placeholder="장소 검색"> <label
 												for="partyLocation" id="placeholderForSearch">&#128270;
-												장소를 알려주세요!</label>
+												장소를 입력하시고 엔터키를 눌러주세요!</label>
 										</div>
 
 										<div style="display: flex; justify-content: center">

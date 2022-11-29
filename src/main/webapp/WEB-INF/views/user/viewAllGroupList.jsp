@@ -31,7 +31,7 @@
    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
   <!-- 아이콘 -->
   <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
-<title>Insert title here</title>
+<title>모임 전체</title>
 
 
   <style>
@@ -151,9 +151,9 @@ ul {
    width: 100%;
    margin-top: 40px;
     margin-bottom: 0px;
-   background-color: #fbfbdf;
-   border-top: 5px solid #ffd766;
-   border-bottom: 5px solid #ffd766;
+   background-color: #f7f9ff;
+   border-top: 5px solid #8d9ee0;
+   border-bottom: 5px solid #8d9ee0;
    padding-right: 100px;
     padding-left: 100px;
     padding-top: 30px;
@@ -163,11 +163,11 @@ ul {
 
 .card {
    width:350px;
-    border: 3px solid #d5f1d5;
+    border: 4px solid #8d9ee0;
     cursor: pointer;
 }
 .card-body{
-   background-color : #f4fdef;
+   background-color : #ffffff;
    padding-bottom:0px;
 }
 .card>img {
@@ -228,7 +228,7 @@ footer.footer {
 /*슬라이드*/
 img {
    max-width: 100%;
-   height: auto;
+
 }
 
 .slider {
@@ -265,7 +265,6 @@ img {
 #categoryList {
    display: none
 }
-
 
 
 
@@ -814,7 +813,7 @@ body {
                   	</c:if>
                   	<c:if test = "${selectAllList.size() > 0}">
 						<c:forEach items="${selectAllList}" var="dto">
-	                        <div class="col-md-3 d-flex justify-content-center p-4">
+	                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center p-4">
 	                           <div class="card">
 	                           		<c:choose>
 										<c:when test="${dto.sys_name ne null}">

@@ -2,7 +2,6 @@ package com.kiri.service;
 
 import java.io.File;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +18,9 @@ import com.kiri.dao.Board_CommentDAO;
 import com.kiri.dao.Board_FileDAO;
 import com.kiri.dao.LikeDAO;
 import com.kiri.dto.BoardDTO;
+import com.kiri.dto.Board_CommentDTO;
 import com.kiri.dto.Board_FileDTO;
+import com.kiri.dto.MemberDTO;
 import com.kiri.utills.Criteria;
 
 @Service
@@ -53,14 +54,17 @@ public class BoardService {
 		return map;
 	}
 	
+	// 댓글 정보 가져오기
+//	public List<Board_CommentDTO> getCommentList(int seq_board) throws Exception{
+//		return commentDAO.selectAll(seq_board);
+//	}
+	
 	// 댓글 프로필 조회
-	public String getProfileImg(String user_email) throws Exception{
-		if(user_email != null) {
-			return commentDAO.getProfileImg(user_email);
-		}else {
-			return null;
-		}
-	}
+//	public List<String> getProfileImg(int seq_board) throws Exception{
+//		
+//		return commentDAO.getProfileImg(seq_board);
+//		
+//	}
 	
 	// 조회수 + 1
 	public void viewCntUp(int seq_board) throws Exception{

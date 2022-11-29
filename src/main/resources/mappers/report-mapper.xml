@@ -10,4 +10,9 @@
       insert into report values (seq_report.nextval, #{send_email}, #{receive_email}, #{report_send}, #{report_receive}, #{report_reason}, sysdate)
    </insert>
 
+	<!-- 신고 중복검사  -->
+	<select id ="selectReport" parameterType = "com.kiri.dto.ReportDTO" resultType="int">
+		select count(*) from report where send_email = #{send_email} and receive_email = #{receive_email}
+	</select>
+
 </mapper>

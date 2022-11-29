@@ -16,5 +16,9 @@ public class ReportService {
    public String insertReport(ReportDTO ReportDTO) throws Exception{
       return ReportDAO.insertReport(ReportDTO);
    }
+   // 신고 중복검사 
+public int selectReport(ReportDTO reportDTO) {
+	return ReportDAO.selectReport(reportDTO);
+}
 
 }

@@ -610,8 +610,7 @@ a {
                         maintainAspectRatio: false,
                         plugins: {
                             legend: {
-                               display: true,
-                               position: 'bottom',
+                               display: false,
                             }
                          },
                         tooltips: {

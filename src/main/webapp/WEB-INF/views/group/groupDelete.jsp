@@ -449,7 +449,7 @@ footer.footer {
 				</div>
 				<div class="row">
 					<div class="col-md-12 d-flex justify-content-center" style="margin-bottom:30px;">
-						<div data-text="모임 해산하기" id = "deleteBtn" class = "deleteBtn">모임 해산하기</div>
+						<div data-text="모임 해산하기" id = "deleteBtn" class = "deleteBtn" style = "font-family: 'MICEGothic Bold';">모임 해산하기</div>
 					</div>
 				</div>
 			</div>

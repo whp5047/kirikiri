@@ -137,15 +137,15 @@
 		<if test="category == 'board_all'">
 			select * from board where board_category not like '%공지%' and
 					(board_title like '%' || #{keyword} ||'%' or
-					board_content like '%' || #{keyword} ||'%') and user_email=#{user_email}
+					board_category like '%' || #{keyword} ||'%') and user_email=#{user_email}
 		</if>
 		<if test="category == 'board_title'">
 			select * from board where board_category not like '%공지%' and
 					board_title like '%' || #{keyword} ||'%' and user_email=#{user_email}		
 		</if>
-		<if test="category == 'board_content'">
+		<if test="category == 'board_category'">
 			select * from board where board_category not like '%공지%' and
-					board_content like '%' || #{keyword} ||'%' and user_email= #{user_email}		
+					board_category like '%' || #{keyword} ||'%' and user_email= #{user_email}		
 		</if>
 	</select>
 	<select id="selectBoard" parameterType="map" resultType="com.kiri.dto.BoardDTO">
@@ -173,16 +173,16 @@
 		
 		<if test="category == 'board_all'">
 			select * from group_board where
-					(title like '%' || #{keyword} ||'%' or
-					content like '%' || #{keyword} ||'%') and user_email=#{user_email}
+					(gboard_title like '%' || #{keyword} ||'%' or
+					gboard_category like '%' || #{keyword} ||'%') and user_email=#{user_email}
 		</if>
-		<if test="category == 'title'">
+		<if test="category == 'gboard_title'">
 			select * from group_board where
-					title like '%' || #{keyword} ||'%' and user_email=#{user_email}		
+					gboard_title like '%' || #{keyword} ||'%' and user_email=#{user_email}		
 		</if> 
-		<if test="category == 'content'">
+		<if test="category == 'gboard_category'">
 			select * from group_board where
-					content like '%' || #{keyword} ||'%' and user_email=#{user_email}		
+					gboard_category like '%' || #{keyword} ||'%' and user_email=#{user_email}		
 		</if> 
 	</select>
 
@@ -227,15 +227,14 @@
 
 	<!-- 내가 쓴 일반게시판 글 갯수 가져오기 -->
 	<select id="selectBoardCount" resultType="int">
-		select count(*) from
-		board
-		where user_email = #{user_email}
+		select count(*) from board
+			where user_email = #{user_email}
 	</select>
 
 	<!-- 내가 쓴 모임게시판 글 갯수 가져오기 -->
 	<select id="selectGroupBoardCount" resultType="int">
 		select count(*)
-		from group_board
+			from group_board
 		where user_email = #{user_email}
 	</select>
 </mapper>

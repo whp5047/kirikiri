@@ -21,6 +21,11 @@ public class reportDAO {
       if(rs > 0) return "success";
       else return "fail";
    }
+
+// 신고 중복검사 
+public int selectReport(ReportDTO reportDTO) {
+	return session.selectOne("reportMapper.selectReport", reportDTO);
+}
       
       
 }

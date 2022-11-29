@@ -39,7 +39,7 @@
 <!-- 아이콘 -->
 <script src="https://kit.fontawesome.com/f9358a6ceb.js"
 	crossorigin="anonymous"></script>
-<title>Insert title here</title>
+<title>지역별 모임</title>
 
 
 <style>
@@ -160,13 +160,13 @@ ul {
 
 /* body content */
 .content {
-	width: 100%;
-	margin-top: 40px;
+    width: 100%;
+    margin-top: 40px;
     margin-bottom: 0px;
-	background-color: #fbfbdf;
-	border-top: 5px solid #ffd766;
-	border-bottom: 5px solid #ffd766;
-	padding-right: 100px;
+    background-color: #f7f9ff;
+    border-top: 5px solid #8d9ee0;
+    border-bottom: 5px solid #8d9ee0;
+    padding-right: 100px;
     padding-left: 100px;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -174,13 +174,13 @@ ul {
 }
 
 .card {
-	width:350px;
-    border: 3px solid #d5f1d5;
+width: 350px;
+    border: 4px solid #8d9ee0;
     cursor: pointer;
 }
 .card-body{
-	background-color : #f4fdef;
-	padding-bottom:0px;	
+    background-color: #ffffff;
+    padding-bottom: 0px; 
 }
 .card>img {
 	width: 100%;
@@ -237,7 +237,7 @@ footer.footer {
 /*슬라이드*/
 img {
 	max-width: 100%;
-	height: auto;
+
 }
 
 .slider {

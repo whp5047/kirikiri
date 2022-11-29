@@ -7,15 +7,16 @@
 	<!-- 자유게시판 -->
 	<!-- 전체 댓글 목록 -->
 	<select id="selectAll" parameterType="int" resultType="com.kiri.dto.Board_CommentDTO">
-		select * from board_comment
+		select a.user_image, b.* from member a inner join board_comment b
+			on a.user_email = b.user_email
 			where seq_board = #{seq_board}
 			order by comment_date asc
 	</select>
 	
 	<!-- 댓글 프로필 -->
-	<select id="getProfileImg" parameterType="String" resultType="String">
-		select user_image from member where user_email = #{user_email}
-	</select>
+<!-- 	<select id="getProfileImg" parameterType="int" resultType="com.kiri.dto.Board_CommentDTO">
+		select a.user_image, b.* from member a inner join board_comment b on a.user_email = b.user_email where seq_board = #{seq_board}
+	</select> -->
 	
 	<!-- 댓글 등록 -->
 	<insert id="write" parameterType="com.kiri.dto.BoardDTO">
@@ -46,7 +47,8 @@
 	<!-- 그룹 게시판 -->
 	<!-- 전체 댓글 목록 -->
 	<select id="selectAllG" parameterType="int" resultType="com.kiri.dto.Group_Board_CommentDTO">
-		select * from group_board_comment
+		select a.user_image, b.* from member a inner join group_board_comment b
+			on a.user_email = b.user_email
 			where seq_group_board = #{seq_group_board}
 			order by comment_date asc
 	</select>

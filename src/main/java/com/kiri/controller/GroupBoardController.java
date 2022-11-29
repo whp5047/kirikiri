@@ -78,7 +78,7 @@ public class GroupBoardController {
 	@ResponseBody
 	public String uploadSummernoteImg(@RequestParam("file") MultipartFile file) throws Exception{
 		String realPath = session.getServletContext().getRealPath("groupBoardFile");
-//		System.out.println("realPath : " + realPath);
+
 		JsonObject jsonObject = service.uploadSummernoteImg(file, realPath);
 		
 		String result = jsonObject.toString();
@@ -93,7 +93,7 @@ public class GroupBoardController {
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals("postView")) {
+				if (cookie.getName().equals("groupPostView")) {
 					oldCookie = cookie;
 				}
 			}
@@ -109,7 +109,7 @@ public class GroupBoardController {
 			}
 		}else {
 			service.viewCntUp(seq_group_board);
-			Cookie newCookie = new Cookie("postView","[" + seq_group_board + "]");
+			Cookie newCookie = new Cookie("groupPostView","[" + seq_group_board + "]");
 			newCookie.setPath("/");
 			newCookie.setMaxAge(60 * 60 * 24);
 			response.addCookie(newCookie);
@@ -123,7 +123,6 @@ public class GroupBoardController {
 		String user_email = ((MemberDTO)session.getAttribute("loginSession")).getUser_email();
 		model.addAttribute("like", service.like(seq_group_board, user_email));
 		// 댓글 프로필
-		model.addAttribute("profile", service.getProfileImg(user_email));
 		
 		// criteria 인스턴스 전달
 		model.addAttribute("cri", cri);
@@ -161,14 +160,14 @@ public class GroupBoardController {
 	@ResponseBody
 	public String delImg(String src) throws Exception {
 		String path = session.getServletContext().getRealPath("groupBoardFile");
-		System.out.println("src : " + src);
+
 		service.delFile(path, src);
 		return "success";
 	}
 	
 	@RequestMapping(value = "/delete") // 게시글 삭제 요청
 	public String delete(int seq_group, int seq_group_board) throws Exception{
-		//System.out.println(seq_group);
+
 		service.delete(seq_group_board);
 		return "redirect:/Gboard/toBoard?seq_group="+seq_group;
 	}

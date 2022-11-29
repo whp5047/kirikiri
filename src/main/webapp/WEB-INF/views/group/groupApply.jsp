@@ -58,7 +58,7 @@
 
 /* header */
 header {
-	font-family : 'MICEGothic Bold';
+   font-family : 'MICEGothic Bold';
 }
 
 
@@ -105,30 +105,30 @@ header {
 
 /*테이블 배경 및 범위*/
 .tableinfo {
-	margin-top: 50px;
+   margin-top: 50px;
 }
 /*버튼 및 테이블*/
 .rowBtn {
-	border: 5px solid #d2e3ec;
-	width: 60%;
-	margin: auto;
-	margin-top: 50px;
-	padding: 30px;
+   border: 5px solid #d2e3ec;
+   width: 60%;
+   margin: auto;
+   margin-top: 50px;
+   padding: 30px;
 }
 
 .btnBox {
-	text-align: center;
-	margin-bottom: 10px;
+   text-align: center;
+   margin-bottom: 10px;
 }
 
 /*테이블*/
 .table {
-	width: 80%;
-	margin: auto;
-	margin-top: 40px;
-	margin-bottom: 40px;
-	font-size:20px;
-	font-family:MICEGothic;
+   width: 80%;
+   margin: auto;
+   margin-top: 40px;
+   margin-bottom: 40px;
+   font-size:20px;
+   font-family:MICEGothic;
 }
 
 tr {
@@ -140,7 +140,7 @@ tr {
    margin-top: 50px;
 }
 .table-primary{
-	font-weight:bold;
+   font-weight:bold;
 }
 /* 네비바 드롭다운 */
 .dropdown-toggle:hover {
@@ -154,45 +154,45 @@ tr {
    font-weight: bold;
 }
 ul {
-	list-style: none;
-	padding: 0;
+   list-style: none;
+   padding: 0;
 }
 
 /* footer */
 .footer-imgBox img {
-	max-width: 100%;
+   max-width: 100%;
 }
 
 .footerWrapper {
-	background-color: white;
-	font-family: "MICEGothic Bold";
-	font-size: 15px;
+   background-color: white;
+   font-family: "MICEGothic Bold";
+   font-size: 15px;
 }
 
 .footerBox {
-	height: 0px;
+   height: 0px;
 }
 
 footer.footer {
-	padding-top: 2rem;
-	padding-bottom: 2rem;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
 }
 
 .footer a {
-	text-decoration: none;
-	color: black;
-	font-weight: 40px;
-	font-weight: bold;
+   text-decoration: none;
+   color: black;
+   font-weight: 40px;
+   font-weight: bold;
 }
 
 .footer-imgBox>img {
-	height: 100%;
-	text-align: center;
+   height: 100%;
+   text-align: center;
 }
 
 .footer-imgBox {
-	height: 100%;
-	text-align: center;
+   height: 100%;
+   text-align: center;
 }
 
 /*버튼4개*/
@@ -208,7 +208,7 @@ footer.footer {
   cursor:pointer;
 }
 .btn-3d.blue:hover{
-	background-color: #699DD1;
+   background-color: #699DD1;
 }
 .btn-3d:active {
   top: 9px;
@@ -223,7 +223,7 @@ footer.footer {
 }
 /*가입신청 버튼 색 변경*/
 .applyBtn{
-	background-color: #aed6ff;
+   background-color: #aed6ff;
     box-shadow: 0 0 0 1px #6698cb inset, 0 0 0 2px rgb(255 255 255 / 15%) inset, 0 8px 0 0 rgb(110 164 219 / 70%), 0 8px 0 1px rgb(0 0 0 / 40%), 0 8px 8px 1px rgb(0 0 0 / 50%);
 }
 /*버튼 승인,거절*/
@@ -262,8 +262,8 @@ footer.footer {
     box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
 }
 .btn-text.color-11 {
-	background-image: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);  
-	box-shadow: 0 5px 15px rgba(242, 97, 103, .4);
+   background-image: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);  
+   box-shadow: 0 5px 15px rgba(242, 97, 103, .4);
 }
 </style>
 </head>
@@ -415,18 +415,18 @@ footer.footer {
       <div class="container-btn">
          <!-- 버튼 그룹 -->
          <div class="row rowBtn">
-			<div class="col-md-3 btnBox">
-				<div id = "groupApply" class="row btn-3d blue applyBtn" style="font-weight: bold;">가입 신청</div>
-			</div>
-			<div class="col-md-3 btnBox">
-				<div id="groupMember" class="row btn-3d blue" style="font-weight: bold;">멤버 관리</div>
-			</div>
-			<div class="col-md-3 btnBox">
-				<div id="groupModify" class="row btn-3d blue" style="font-weight: bold;">모임 수정</div>
-			</div>
-			<div class="col-md-3 btnBox">
-				<div id="groupDelete" class="row btn-3d blue" style="font-weight: bold;">모임 해산</div>
-			</div>
+         <div class="col-md-3 btnBox">
+            <div id = "groupApply" class="btn-3d blue applyBtn" style="font-weight: bold;">가입 신청</div>
+         </div>
+         <div class="col-md-3 btnBox">
+            <div id="groupMember" class="btn-3d blue" style="font-weight: bold;">멤버 관리</div>
+         </div>
+         <div class="col-md-3 btnBox">
+            <div id="groupModify" class="btn-3d blue" style="font-weight: bold;">모임 수정</div>
+         </div>
+         <div class="col-md-3 btnBox">
+            <div id="groupDelete" class="btn-3d blue" style="font-weight: bold;">모임 해산</div>
+         </div>
          </div>
 
          <!-- 테이블 -->
@@ -475,8 +475,8 @@ footer.footer {
             </div>
             <div class="row">
                <div class="col d-flex justify-content-center">
-               		<button type = "submit" class="btn-text color-8" id="applyBtn">가입 승인</button>
-			    	<button type = "button" class="btn-text color-11" id="denyBtn">가입 거절</button>
+                     <button type = "submit" class="btn-text color-8" id="applyBtn">가입 승인</button>
+                <button type = "button" class="btn-text color-11" id="denyBtn">가입 거절</button>
                </div>
             </div>
          </div>
@@ -575,6 +575,7 @@ $("#groupDelete").on("click", function(){
    $("#applyBtn").on("click", function(){
       let count = $("#group_people").val();
       let groupCount = $("#groupCount").val();
+      let seq_group = $("#seq_group").val();
       let checkBoxArr = [];
       $("input[name=checkUser_email]:checked").each(function(){
          checkBoxArr.push($(this).val());
@@ -585,41 +586,43 @@ $("#groupDelete").on("click", function(){
               text: '선택된 항목이 없습니다..',
             })
       }else{
-	      var jsonData = {
-	         "userEmails" : JSON.stringify(checkBoxArr)
-	      };
-	      var jsonString = JSON.stringify(jsonData);
+         var jsonData = {
+            "userEmails" : JSON.stringify(checkBoxArr),
+            "seq_group" : seq_group
+         };
+         var jsonString = JSON.stringify(jsonData);
 
-	       $.ajax({
-	         url:"/group/completeApply?&group_people="+count+"&groupCount="+groupCount,
-	         headers: {'Content-Type': 'application/json'},
-	         type : "post",
-	         data: jsonString,
-	         success:function(data){
-	            if(data == "success"){
-	                  Swal.fire({
-	                       icon: 'success',
-	                       text: '승인이 완료되었습니다.',
-	                     })
-	            }else if(data == "error"){
-	               Swal.fire({
-	                    icon: 'error',
-	                    title: 'Oops...',
-	                    text: '인원수를 확인해주세요!',
-	                  })
-	            }
-	            setTimeout(function() {
-	                    window.location.href = "";
-	                },1500);
-	         },error : function(e){
-	            console.log(e);
-	         }
-	      })
+          $.ajax({
+            url:"/group/completeApply?&group_people="+count+"&groupCount="+groupCount,
+            headers: {'Content-Type': 'application/json'},
+            type : "post",
+            data: jsonString,
+            success:function(data){
+               if(data == "success"){
+                     Swal.fire({
+                          icon: 'success',
+                          text: '승인이 완료되었습니다.',
+                        })
+               }else if(data == "error"){
+                  Swal.fire({
+                       icon: 'error',
+                       title: 'Oops...',
+                       text: '인원수를 확인해주세요!',
+                     })
+               }
+               setTimeout(function() {
+                       window.location.href = "";
+                   },1500);
+            },error : function(e){
+               console.log(e);
+            }
+         })
       }
    })
 
    // 그룹 승인 거절하기
    $("#denyBtn").on("click", function(){
+     let seq_group = $("#seq_group").val();
       let checkBoxArr = [];
       $("input[name=checkUser_email]:checked").each(function(){
          checkBoxArr.push($(this).val());
@@ -630,28 +633,29 @@ $("#groupDelete").on("click", function(){
               text: '선택된 항목이 없습니다.',
             })
       }else{
-	      var jsonData = {
-	         "userEmails" : JSON.stringify(checkBoxArr)
-	      };
-	      var jsonString = JSON.stringify(jsonData);
+         var jsonData = {
+            "userEmails" : JSON.stringify(checkBoxArr),
+            "seq_group" : seq_group
+         };
+         var jsonString = JSON.stringify(jsonData);
 
-	       $.ajax({
-	         url:"/group/denyApply",
-	         headers: {'Content-Type': 'application/json'},
-	         type : "post",
-	         data: jsonString,
-	         success:function(data){
-	            Swal.fire({
-	                 icon: 'success',
-	                 text: '거절이 완료되었습니다.',
-	               })
-	               setTimeout(function() {
-	                       window.location.href = "";
-	                   },1500);
-	         },error : function(e){
-	            console.log(e);
-	         }
-	      })
+          $.ajax({
+            url:"/group/denyApply",
+            headers: {'Content-Type': 'application/json'},
+            type : "post",
+            data: jsonString,
+            success:function(data){
+               Swal.fire({
+                    icon: 'success',
+                    text: '거절이 완료되었습니다.',
+                  })
+                  setTimeout(function() {
+                          window.location.href = "";
+                      },1500);
+            },error : function(e){
+               console.log(e);
+            }
+         })
 
       }
    })

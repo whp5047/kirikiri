@@ -19,9 +19,9 @@ public class Group_Board_CommentDAO {
 	}
 	
 	// 댓글 프로필
-	public String getProfileImgG(String user_email) throws Exception{
-		return session.selectOne("commentMapper.getProfileImgG", user_email);
-	}
+//	public String getProfileImgG(String user_email) throws Exception{
+//		return session.selectOne("commentMapper.getProfileImgG", user_email);
+//	}
 	
 	// 댓글 등록
 	public int write(Group_Board_CommentDTO dto) throws Exception{

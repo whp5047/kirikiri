@@ -11,11 +11,25 @@ public class Group_Board_CommentDTO {
 	private String user_nickname;
 	private String comment_content;
 	private String comment_date;
+	private String user_image;
 	
+	
+//	// date -> String 생성자
+//	public Group_Board_CommentDTO(int seq_group_comment, int seq_group_board, int seq_group, String user_email,
+//			String user_nickname, String comment_content, Date comment_date) {
+//		super();
+//		this.seq_group_comment = seq_group_comment;
+//		this.seq_group_board = seq_group_board;
+//		this.seq_group = seq_group;
+//		this.user_email = user_email;
+//		this.user_nickname = user_nickname;
+//		this.comment_content = comment_content;
+//		this.comment_date = getStringDate(comment_date);
+//	}
+			
 	public Group_Board_CommentDTO() {}
-
 	public Group_Board_CommentDTO(int seq_group_comment, int seq_group_board, int seq_group, String user_email,
-			String user_nickname, String comment_content, String comment_date) {
+			String user_nickname, String comment_content, String comment_date, String user_image) {
 		super();
 		this.seq_group_comment = seq_group_comment;
 		this.seq_group_board = seq_group_board;
@@ -24,10 +38,11 @@ public class Group_Board_CommentDTO {
 		this.user_nickname = user_nickname;
 		this.comment_content = comment_content;
 		this.comment_date = comment_date;
+		this.user_image = user_image;
 	}
-	// date -> String 생성자
+	
 	public Group_Board_CommentDTO(int seq_group_comment, int seq_group_board, int seq_group, String user_email,
-			String user_nickname, String comment_content, Date comment_date) {
+			String user_nickname, String comment_content, Date comment_date, String user_image) {
 		super();
 		this.seq_group_comment = seq_group_comment;
 		this.seq_group_board = seq_group_board;
@@ -36,8 +51,9 @@ public class Group_Board_CommentDTO {
 		this.user_nickname = user_nickname;
 		this.comment_content = comment_content;
 		this.comment_date = getStringDate(comment_date);
+		this.user_image = user_image;
 	}
-		
+
 	// date -> String
 	public String getStringDate(Date date) {
 		String rs = null;
@@ -49,7 +65,7 @@ public class Group_Board_CommentDTO {
 		}
 		return rs;
 	}
-
+	
 	public int getSeq_group_comment() {
 		return seq_group_comment;
 	}
@@ -106,11 +122,20 @@ public class Group_Board_CommentDTO {
 		this.comment_date = comment_date;
 	}
 
+	public String getUser_image() {
+		return user_image;
+	}
+
+	public void setUser_image(String user_image) {
+		this.user_image = user_image;
+	}
+
 	@Override
 	public String toString() {
 		return "Group_Board_CommentDTO [seq_group_comment=" + seq_group_comment + ", seq_group_board=" + seq_group_board
 				+ ", seq_group=" + seq_group + ", user_email=" + user_email + ", user_nickname=" + user_nickname
-				+ ", comment_content=" + comment_content + ", comment_date=" + comment_date + "]";
+				+ ", comment_content=" + comment_content + ", comment_date=" + comment_date + ", user_image="
+				+ user_image + "]";
 	}
-	
+
 }

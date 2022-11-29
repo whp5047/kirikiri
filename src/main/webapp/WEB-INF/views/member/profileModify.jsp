@@ -25,7 +25,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
 	rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<title>Document</title>
+<title>개인정보 수정</title>
 <style>
 /* 눈누 폰트 */
 @font-face {
@@ -175,6 +175,7 @@ body {
 
 label {
 	margin: 5px;
+	align-self : center;
 }
 
 button {
@@ -184,8 +185,8 @@ button {
 	height: 30%;
 }
 
-.row {
-	margin-top: 10px;
+.row:not(#menu .row) {
+   margin-top: 10px;
 }
 
 span {
@@ -255,32 +256,40 @@ h1 {
 	margin-top: 30px;
 }
 
-/*풋터 영역*/
-.footerBox {
-	height: 0px;
-}
-
-footer.footer {
-	padding-top: 2rem;
-	padding-bottom: 2rem;
-	background-color: white;
-}
-
-.footer a {
-	text-decoration: none;
-	color: black;
-	font-weight: 40px;
-	font-weight: bold;
-}
-
-.footer-imgBox {
-	overflow: hidden;
-}
-
-.footer-imgBox>img {
-	width: 100%;
-	height: 100%;
-}
+      /*풋터 영역*/
+      .footer-imgBox img{
+         max-width: 100%;
+      }
+      
+      .footerWrapper{
+         background-color: white;
+         font-family: "MICEGothic Bold";
+         font-size: 15px;
+      }
+      .footerBox {
+         height: 0px;
+      }
+      
+      footer.footer {
+         padding-top: 2rem;
+         padding-bottom: 2rem;
+      }
+      
+      .footer a {
+         text-decoration: none;
+         color: black;
+         font-weight: 40px;
+         font-weight: bold;
+      }
+      
+      .footer-imgBox>img {
+         height: 100%;
+         text-align:center;
+      }
+      .footer-imgBox {
+         height: 100%;
+         text-align:center;
+      }
 </style>
 </head>
 <script>
@@ -392,39 +401,68 @@ footer.footer {
 
 						</a>
 					</div>
-					<div class="col-5">
-						<div class="row align-items-center justify-content-center">
-							<div class="col-auto">
-								<ul class="navbar-nav mb-2 mb-lg-0 me-2">
-									<c:if test="${empty loginSession}">
-										<li class="nav-item"><a class="nav-link"
-											href="/toLogin.mem">로그인</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/toSignUp.mem">회원가입</a></li>
-									</c:if>
-								</ul>
-							</div>
-
-							<div class="col-auto user">
-								<c:if test="${not empty loginSession}">
-									<div class="dropdown text-end">
-										<a href="#"
-											class="d-block link-dark text-decoration-none dropdown-toggle"
-											id="dropdownUser1" data-bs-toggle="dropdown"
-											aria-expanded="false"> <img
-											src="/resources/images/profile.jpg" alt="mdo" width="32"
-											height="32" class="rounded-circle">
-										</a>
-										<ul class="dropdown-menu text-small"
-											aria-labelledby="dropdownUser1">
-											<li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-											<li><a class="dropdown-item" href="#">로그아웃</a></li>
-										</ul>
-									</div>
-								</c:if>
-							</div>
-						</div>
-					</div>
+               <div class="col-5">
+                  <div class="row align-items-center justify-content-center">
+                     <div class="col-auto">
+                        <ul class="navbar-nav mb-2 mb-lg-0 me-2">
+                           <c:if test="${empty loginSession}">
+                              <li class="nav-item"><a class="nav-link"
+                                 href="/login/toLogin">로그인</a></li>
+                              <li class="nav-item"><a class="nav-link"
+                                 href="/signup/toSignupAgree">회원가입</a></li>
+                           </c:if>
+                        </ul>
+                     </div>
+                     <div class="col-auto user">
+               <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                         <div class="dropdown text-end">
+                           <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                           <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+                           </a>
+                           <ul class="dropdown-menu text-small"
+                              aria-labelledby="dropdownUser1">
+                              <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                              <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
+                              <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                           </ul>
+                        </div>
+                     </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> 
+                                 <c:if test="${loginSession.user_image eq null}">
+                                    <img src="/resources/images/profile.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
+                                 </c:if>
+                                 <c:if test="${loginSession.user_image ne null}">
+                                    <img src="/profile/${loginSession.user_image }" alt="mdo" width="40" height="40" class="rounded-circle">
+                                 </c:if>
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider" style="margin:0px;">
+                                 </li>
+                                  <c:if test="${loginType ne 'kakao'}">
+                                  	 <li><a class="dropdown-item mt-2" href="/login/toLogout">로그아웃</a></li>
+                                  </c:if>
+	                              <c:if test="${loginType eq 'kakao'}">
+	                                 <li><a class="dropdown-item mt-2" href="${kakaoLogout}">로그아웃</a></li>
+	                              </c:if>
+                              </ul>
+                           </div>
+                        </c:if>
+                     </div>
+                  </div>
+               </div>
 				</div>
 			</nav>
 		</div>
@@ -459,7 +497,7 @@ footer.footer {
 					</div>
 					<div class="col-md-5">
 						<input type="text" id="nickname" name="user_nickname"
-							class="form-control user_nickname" value="${memberdto.user_nickname}">
+							class="form-control user_nickname" value="${memberdto.user_nickname}" placeholder="닉네임은 12자까지 가능합니다" maxlength="12">
 					</div>
 					<div class="col-md-2">
 						<button type="button" class="btn btn-secondary" id="nicknameCheck" disabled>중복확인</button>
@@ -575,7 +613,7 @@ footer.footer {
 					<div class="col-md-3">
 						<p>생년월일</p>
 					</div>
-					<div class="col-md-7">
+					<div class="col-md-8 d-flex justify-content-start">
 						<input type="text" name="year" class="form-control bthday" maxlength="4" value="${date.get(0)}" style="width:140px;" readonly>
 						<label for="year">년</label> 
 						<input type="text" name="month" class="form-control bthday" maxlength="2" value="${date.get(1)}" style="width:130px;" readonly>
@@ -588,39 +626,64 @@ footer.footer {
 							<span class="d-none" id="birthText" style="color:red; font-size:0.8rem; margin-left:8px;">** 생년월일은 수정할 수 없습니다. **</span>					
 						</div>
 					</div>
-					<div class="col-md-2"></div>
+					<div class="col-md-1"></div>
 				</div>
 				
 				<c:if test="${loginType eq 'general'}">
-					<div class="row">
-						<div class="col-md-3">
-							<p>비밀번호</p>
-						</div>
-						<div class="col-md-7" style="text-align: left;">
-							<input type="password" id="password" name="user_pw" class="form-control" style="font-family:none;">
-							<span class="d-none" id="wrong-password-regex" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호의 형식에 맞지 않습니다. **</span>
-							<ul class="desc" style="font-size: 0.8rem; padding: 10px">
-								<li>영문, 숫자, 특수문자를 혼합하여 최소 8자리 이상 20자리 이하로 설정해 주세요.</li>
-								<li>기타 일반 정보 등으로부터 추측이 용이한 비밀번호는 피해주세요.</li>
-								<li>타사 서비스에서 사용하는 비밀번호와 동일한 비밀번호를 사용하지 마십시오.</li>
-								<li>번호를 바꾸시려면 중복확인은 필수 항목입니다.</li>
-							</ul>
-						</div>
-						<div class="col-2"></div>
-					</div>		
-					<div class="row">
-						<div class="col-md-3">
-							<p>비밀번호 확인</p>
-						</div>
-						<div class="col-md-7" style="text-align: left;">
-							<input type="password" id="password-check" class="form-control" style="font-family:none;">
-							<span class="d-none" id="wrong-password-check" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호와 맞지 않습니다. **</span>
-							<span class="d-none" id="right-password-check" style="color:green; font-size:0.8rem; margin-left:8px;">** 비밀번호와 일치합니다. **</span>
-						</div>
-						<div class="col-2"></div>
-					</div>					
-				</c:if>
-				<input type="text" class='d-none' value="${memberdto.user_pw}" name="data_password">
+               <div class="row">
+                  <div class="col-md-3">
+                     <p>비밀번호</p>
+                  </div>
+                  <div class="col-md-7" style="text-align: left;">
+                     <input type="password" id="password" name="user_pw" class="form-control" style="font-family:none;">
+                     <span class="d-none" id="wrong-password-regex" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호의 형식에 맞지 않습니다. **</span>
+                     <ul class="desc" style="font-size: 0.8rem; padding: 10px">
+                        <li>영문, 숫자, 특수문자를 혼합하여 최소 8자리 이상 20자리 이하로 설정해 주세요.</li>
+                        <li>기타 일반 정보 등으로부터 추측이 용이한 비밀번호는 피해주세요.</li>
+                        <li>타사 서비스에서 사용하는 비밀번호와 동일한 비밀번호를 사용하지 마십시오.</li>
+                        <li>번호를 바꾸시려면 중복확인은 필수 항목입니다.</li>
+                     </ul>
+                  </div>
+                  <div class="col-2"></div>
+               </div>      
+               <div class="row">
+                  <div class="col-md-3">
+                     <p>비밀번호 확인</p>
+                  </div>
+                  <div class="col-md-7" style="text-align: left;">
+                     <input type="password" id="password-check" class="form-control" style="font-family:none;">
+                     <span class="d-none" id="wrong-password-check" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호와 맞지 않습니다. **</span>
+                     <span class="d-none" id="right-password-check" style="color:green; font-size:0.8rem; margin-left:8px;">** 비밀번호와 일치합니다. **</span>
+                  </div>
+                  <div class="col-2"></div>
+               </div>               
+            </c:if> 
+            
+            <c:if test="${loginType ne 'general'}">
+               <div class="row d-none">
+                  <div class="col-md-3">
+                     <p>비밀번호</p>
+                  </div>
+                  <div class="col-md-7" style="text-align: left;">
+                     <input type="password" id="password" name="user_pw" class="form-control" style="font-family:none;" disabled>
+                     <span class="d-none" id="wrong-password-regex" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호의 형식에 맞지 않습니다. **</span>
+                        <span style="color:red; font-size: 0.8rem; padding: 10px">** 소셜로 로그인하시면 비밀번호 수정이 안됩니다 ** </span>
+                  </div>
+                  <div class="col-2"></div>
+               </div>
+               <div class="row d-none">
+                  <div class="col-md-3">
+                     <p>비밀번호 확인</p>
+                  </div>
+                  <div class="col-md-7" style="text-align: left;">
+                     <input type="password" id="password-check" class="form-control d-none" style="font-family:none;" disabled>
+                     <span class="d-none" id="wrong-password-check" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호와 맞지 않습니다. **</span>
+                     <span class="d-none" id="right-password-check" style="color:green; font-size:0.8rem; margin-left:8px;">** 비밀번호와 일치합니다. **</span>
+                  </div>
+                  <div class="col-2"></div>
+               </div>                        
+            </c:if> 
+            <input type="text" class='d-none' value="${memberdto.user_pw}" name="data_password">
 				<div class="row">
 					<div class="col-md-3">
 						<p>이메일</p>
@@ -692,7 +755,7 @@ footer.footer {
 					}
 				})
 				
-				let phone2 = $(".checkPhone2").val();;
+				let phone2 = $(".checkPhone2").val();
 				$("#phone2").on("input",function(){
 					phone2 = $(this).val();
 					console.log(phone2)
@@ -870,6 +933,9 @@ footer.footer {
 			let passwordRegex = /^$|^[a-z0-9!@#$]{8,20}$/;
 			let checkPhone = $(".checkPhone").val();
 			let checkPw = $("#check-pw").val();
+			let phone1 = $(".checkPhone1").val();
+			let phone2 = $(".checkPhone2").val();
+			let phone3 = $(".checkPhone3").val();
 			user_phone = phone1 + phone2 + phone3;
 			console.log("adasdas : ",checkPhone)
 			
@@ -946,44 +1012,73 @@ footer.footer {
 		</div>
 	</div>
 
-	<!-- Footer-->
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 footer-imgBox">
-					<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
-				</div>
-				<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-					<ul class="list-inline mb-2">
-						<li class="list-inline-item"><a href="#!">공지사항</a></li>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="#!">회원가입</a></li>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="#!">로그인</a></li>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="#!">책임의 한계 및 법적고지</a></li>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="#!"
-							style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-					</ul>
-					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-						개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-					<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-						57 이레빌딩</p>
-					<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-						2022. All Rights Reserved.</p>
-				</div>
-				<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
-					<ul class="list-inline mb-0">
-						<li class="list-inline-item me-4"><a href="#!"><i
-								class="bi-facebook fs-3"></i></a></li>
-						<li class="list-inline-item me-4"><a href="#!"><i
-								class="bi-twitter fs-3"></i></a></li>
-						<li class="list-inline-item"><a href="#!"><i
-								class="bi-instagram fs-3"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</footer>
+   <!-- Footer-->
+   <div class="footerWrapper mt-5" style="border-top:1px solid #e0e3e8;">
+      <div class="container">
+         <footer class="footer">
+            <div class="row">
+               <div class="col-lg-3 footer-imgBox">
+                  <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
+               </div>
+               <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                  <ul class="list-inline mb-2">
+                     <li class="list-inline-item"><a href="/board/toBoard?pageNum=1&amount=10&keyword=&type=&category=공지">공지사항</a></li>
+                     <li class="list-inline-item">⋅</li>
+                     <c:choose>
+                        <c:when test="${not empty loginSession}">
+                           <li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+                           <li class="list-inline-item">⋅</li>
+                           <c:if test="${loginType ne 'kakao'}">
+                              <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+                           </c:if>
+                           <c:if test="${loginType eq 'kakao'}">
+                              <li class="list-inline-item"><a href="${kakaoLogout}">로그아웃</a></li>
+                           </c:if>
+                        </c:when>
+                        <c:otherwise>
+                           <li class="list-inline-item"><a
+                              href="/signup/toSignupAgree">회원가입</a></li>
+                           <li class="list-inline-item">⋅</li>
+                           <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+                        </c:otherwise>
+                     </c:choose>
+                     <li class="list-inline-item">⋅</li>
+                     <li class="list-inline-item">
+                        <c:choose>
+                           <c:when test="${not empty loginSession}">
+                              <a href="/group/toCreateGroup">모임 만들기</a>
+                           </c:when>
+                           <c:otherwise>
+                              <a href="/login/toLogin">모임 만들기</a>
+                           </c:otherwise>
+                        </c:choose>
+                     </li>
+                     <li class="list-inline-item">⋅</li>
+                     <li class="list-inline-item"><a href="/privacy"
+                        style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+                  </ul>
+                  <p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
+                     개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
+                  <p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
+                     57 이레빌딩</p>
+                  <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
+                     2022. All Rights Reserved.</p>
+               </div>
+               <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
+                  <ul class="list-inline mb-0">
+                     <li class="list-inline-item me-4"><a
+                        href="https://ko-kr.facebook.com"><i
+                           class="bi-facebook fs-3"></i></a></li>
+                     <li class="list-inline-item me-4"><a
+                        href="https://twitter.com/?lang=ko"><i
+                           class="bi-twitter fs-3"></i></a></li>
+                     <li class="list-inline-item"><a
+                        href="https://www.instagram.com/"><i
+                           class="bi-instagram fs-3"></i></a></li>
+                  </ul>
+               </div>
+            </div>
+         </footer>
+      </div>
+   </div>
 </html>

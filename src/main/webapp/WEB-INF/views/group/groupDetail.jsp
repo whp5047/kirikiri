@@ -41,7 +41,6 @@
 	font-weight: 700;
 	font-style: normal;
 }
-
 @font-face {
 	font-family: 'MICEGothic';
 	src:
@@ -68,6 +67,14 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+@font-face {
+          font-family: 'EarlyFontDiary';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EarlyFontDiary.woff2') format('woff2');
+          font-weight: normal;
+          font-style: normal;
+      }
+
 
 * {
 	box-sizing: border-box;
@@ -579,7 +586,7 @@ footer.footer {
                               <a href="/"
                                  class="d-block link-dark text-decoration-none dropdown-toggle"
                                  id="dropdownUser1" data-bs-toggle="dropdown"
-                                 aria-expanded="false"> 
+                                 aria-expanded="false">
                                  <c:if test="${loginSession.user_image eq null}">
                                     <img src="/resources/images/profile.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
                                  </c:if>
@@ -658,7 +665,7 @@ footer.footer {
 								id="profile_image">
 						</c:when>
 						<c:otherwise>
-							<img src="/resources/images/메인사진2(배경).png" id="profile_image" class="kokiriImg">
+							<img src="/resources/images/profile.jpg" id="profile_image" class="kokiriImg">
 						</c:otherwise>
 					</c:choose>
                 </div>
@@ -729,7 +736,7 @@ footer.footer {
                       id="joinGroupBtn">모임 가입하기</button>
                   </div>
                 </div>
-                
+
               </div>
             </div>
 
@@ -795,7 +802,7 @@ footer.footer {
 					<!--상세 정보 내용-->
 					<div class="groupInfo mt-4" style="width:100%;">
             			<span style=" font-size: 30px; background: linear-gradient(to top, #FFE400 20%, transparent 30%)">상세정보</span>
-						<div class="groupContent mt-4">${tbl_group_dto.group_info}</div>
+						<div class="groupContent mt-4" style="font-family: initial;">${tbl_group_dto.group_info}</div>
 					</div>
 				</div>
         <!--주의사항-->
@@ -848,7 +855,7 @@ footer.footer {
                               id="profile_image">
                           </c:when>
                           <c:otherwise>
-                            <img src="/resources/images/메인사진2(배경).png" id="profile_image">
+                            <img src="/resources/images/profile.jpg" id="profile_image">
                           </c:otherwise>
                         </c:choose>
                       </div>
@@ -898,11 +905,11 @@ footer.footer {
 											style="font-size: 14px;">
 											<div>
 												<i class="fa-solid fa-location-dot"></i><span class="ms-1">지역
-													: </span><span id="profileLocation""></span>
+													: </span><span id="profileLocation"></span>
 											</div>
 											<div class="ms-3">
 												<i class="fa-solid fa-mars-and-venus"></i><span class="ms-1">성별
-													: </span><span id="profileGender""></span>
+													: </span><span id="profileGender"></span>
 											</div>
 										</div>
 										<div class="modalProfileIntro" style="padding: 10px;">
@@ -910,7 +917,7 @@ footer.footer {
 										</div>
 									</div>
 								</div>
-								
+
 								<!-- 쪽지보내기 버튼 클릭시 활성화 -->
 								<div class="d-none" id="msgForm">
 									<div class="row">
@@ -1097,7 +1104,11 @@ footer.footer {
               // 회원의 사진이 있을 때만 넣기
               if(data.profileList[0].user_image != null) {
                  document.getElementById("memberProfileImg").src = "/profile/"+data.profileList[0].user_image;
+              }else if(data.profileList[0].user_image == null) {
+            	  document.getElementById("memberProfileImg").src= "/resources/images/profile.jpg"
               }
+              
+              
               $("#profileName").text(data.profileList[0].user_name); // 해당 회원 이름 모달값으로 넣어주기
               $("#profileNickname").text(data.profileList[0].user_nickname); // 해당 회원 닉네임 모달값으로 넣어주기
               $("#profileLocation").text(data.siteList[0].area); // 해당 회원 선호 지역 모달값으로 넣어주기
@@ -1108,8 +1119,8 @@ footer.footer {
               $("#reportName").text('${loginSession.user_name}'); // 해당 회원 이름 신고자에 넣어주기
               $("#user_receive").val(data.profileList[0].user_nickname); // 쪽지 보내기 -> 받는사람 닉네임 넣어주기
               $("#report_receive").val(data.profileList[0].user_nickname); // 신고하기 -> 신고자 닉네임 넣어주기
-              
-              
+
+
               $("#receive_email").val(data.profileList[0].user_email); // 신고하기 -> 신고자 이메일 넣어주기
            },
            error : function(e) {
@@ -1211,7 +1222,7 @@ footer.footer {
                 	   window.open(url, name, option);
                    }
                    return;
-                   
+
                 }
             }
              Swal.fire('모임 회원만 가능합니다');
@@ -1333,7 +1344,8 @@ footer.footer {
                data : {"seq_group" : seq_group,"user_email" : loginSession_id},
                success : function(data) {
                       if(data == "success") {
-                       Swal.fire(
+                    	  console.log("hello");
+                        Swal.fire(
                         '모임가입 신청 완료!',
                         '호스트가 승인을 할 때까지 기다려주세요!',
                         'success'
@@ -1466,9 +1478,12 @@ footer.footer {
                    success : function(data) {
                       if(data == "success") {
                          Swal.fire('신고하기 성공');
-                         $('.profileModal').modal('hide'); // 쪽지 보내기 성공시 모달 닫기
+                         $('.profileModal').modal('hide'); // 신고 성공시 모달 닫기
                        $("#reportContent").val('');
-                      }else {
+                      }else if(data == "noMore") {
+                    	  Swal.fire('이미 해당 인원을 신고하였습니다');
+                      }
+                      else {
                          Swal.fire('신고하기 실패');
                       }
                    },

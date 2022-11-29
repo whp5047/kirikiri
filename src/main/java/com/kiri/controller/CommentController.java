@@ -31,8 +31,7 @@ public class CommentController {
 		String user_nickname = ((MemberDTO)session.getAttribute("loginSession")).getUser_nickname();
 		dto.setUser_email(user_email);
 		dto.setUser_nickname(user_nickname);
-		//dto.setUser_email("abc123");
-		//dto.setUser_nickname("테스트맨1");
+
 		int rs = service.write(dto);
 		
 		if(rs > 0) {

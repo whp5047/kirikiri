@@ -170,6 +170,12 @@
 		    font-weight: normal;
 		    font-style: normal;
 		}
+		@font-face {
+          font-family: 'EarlyFontDiary';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EarlyFontDiary.woff2') format('woff2');
+          font-weight: normal;
+          font-style: normal;
+      	}
 
 		.note-editor .dropdown-toggle::after {
             display: none;
@@ -380,6 +386,7 @@
 	        <div class="row mt-4">
 				<textarea id="summernote" name="gboard_content">${modMap.boardDTO.gboard_content}</textarea>
 	        </div>
+	        <sup>(<span id="nowByte">0</span>/2500bytes)</sup>
 
 	        <div class="row my-4 justify-content-center align-items-center" id="bottom">
 	            <div class="col-auto">
@@ -480,7 +487,7 @@
               maxHeight: 550, // 최대 높이
               focus: true, // 에디터 로딩후 포커스를 맞출지 여부
               lang: "ko-KR", // 한글 설정
-              placeholder: '최대 1000자까지 작성 가능합니다.', //placeholder 설정
+              placeholder: '최대 2500byte까지 작성 가능합니다.', //placeholder 설정
               toolbar: [
                   // [groupName, [list of button]]
                   ['fontname', ['fontname']], // 글꼴
@@ -511,7 +518,11 @@
                     for (var i = files.length - 1; i >= 0; i--) {
                        uploadSummernoteImageFile(files[i], this);
                     }
-                 }
+                 }, onKeyup : function(e){
+						fn_checkByte(this); // 글자수 바이트 체크
+				 }, onKeydown : function(e){
+						fn_checkByte(this); // 글자수 바이트 체크
+				 }
               }
          });
 
@@ -532,7 +543,7 @@
                   if(mutation.removedNodes[0].src != null) {
                      let img = mutation.removedNodes[0].src;
                      //console.log(img);
-                     let src = decodeURIComponent(img.replace("http://localhost/groupBoardFile/", ""));
+                     let src = decodeURIComponent(img.replace("http://192.168.20.21/groupBoardFile/", ""));
                      //console.log(src);
                      $.ajax({
                         url : "/Gboard/delImg"
@@ -552,7 +563,35 @@
          // 감지 시작
          observer.observe(target, config);
       });
-
+      
+		//textarea 바이트 수 체크하는 함수
+		function fn_checkByte(obj){
+			const maxByte = 2500; //최대 100바이트
+			const text_val = obj.value; //입력한 문자
+			const text_len = text_val.length; //입력한 문자수
+			let totalByte=0;
+		
+			for(let i=0; i<text_len; i++){
+				const each_char = text_val.charAt(i);
+				const uni_char = escape(each_char); //유니코드 형식으로 변환
+				if(uni_char.length>4){
+					// 한글 : 2Byte
+					totalByte += 2;
+				}else{
+					// 영문,숫자,특수문자 : 1Byte
+					totalByte += 1;
+				}
+			}
+			if(totalByte>maxByte){
+				document.getElementById("nowByte").innerText = totalByte;
+				document.getElementById("nowByte").style.color = "red";
+			}else{
+				document.getElementById("nowByte").innerText = totalByte;
+				document.getElementById("nowByte").style.color = "green";
+			}
+		}
+		
+		let newImg = new Array();
       // summernote 이미지 업로드 function
       function uploadSummernoteImageFile(file, editor){
          data = new FormData();
@@ -566,15 +605,21 @@
             , processData : false
             , success : function(data){
                $(editor).summernote("editor.insertImage", data.url);
+               newImg.push(data.url.replace("/groupBoardFile/", ""));
             }, error : function(e){
                console.log(e);
             }
          });
       }
 
-      let imgArr = new Array();
+      //let imgArr = new Array();
       // 작성 완료 버튼
       $("#submitBtn").on("click", function(){
+			if($("#nowByte").html() >= 2500){
+				alert("최대 바이트 허용 수를 초과하여 글을 등록할 수 없습니다.");
+				return;
+			}
+    	  
          if($("#title").val() === ""){
             Swal.fire({
                icon: 'warning'
@@ -601,7 +646,7 @@
             return;
          }
 
-         let content = $("#summernote").summernote("code");
+         /* let content = $("#summernote").summernote("code");
          let regImg = /(<img[^>]+src\s*=\s*[\"']?([^>\"']+)[\"']?[^>]*>)/g;
          let src;
          while(regImg.test(content)){
@@ -609,15 +654,15 @@
             imgArr.push(src);
          }
          console.log(imgArr);
-         console.log(imgArr.length);
+         console.log(imgArr.length); */
 
-         if(imgArr.length !== 0){
-            for(let i = 0; i < imgArr.length; i++){
+         if(newImg.length !== 0){
+            for(let i = 0; i < newImg.length; i++){
                let inputImg = $("<input>").attr({
                   "type" : "hidden"
                   , "class" : "imgs"
                   , "name" : "imgs[]"
-                  , "value" : imgArr[i]
+                  , "value" : newImg[i]
                });
                $("#modifyForm").append(inputImg);
             };

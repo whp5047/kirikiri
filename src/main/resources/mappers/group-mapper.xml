@@ -30,7 +30,7 @@
       delete from tbl_group
       where seq_group = #{seq_group}
    </delete>
-	
+   
    <!-- 가입신청 거절하기 -->
    <delete id="denyApply" parameterType="java.util.List">
       delete from group_apply
@@ -39,6 +39,7 @@
          separator="," close=")">
          #{email}
       </foreach>
+      and seq_group = #{seq_group}      
    </delete>
 
    <!-- 가입승인 여러명 받기위한 user_email 뽑기 -->
@@ -51,6 +52,7 @@
          separator="," close=")">
          #{email}
       </foreach>
+      and seq_group = #{seq_group}
    </select>
 
    <!-- 가입신청 승인하기 -->
@@ -137,12 +139,12 @@
    
    <!-- 해당 모임의 멤버 프로필 조회 -->
    <select id="selectMemberProfile" parameterType="String" resultType="com.kiri.dto.MemberDTO">
-   	  select * from member where user_email = #{user_email}
+        select * from member where user_email = #{user_email}
    </select>   
    
    <!-- 해당 모임의 멤버 주소 조회 -->
    <select id="selectMemberSite" parameterType="String" resultType="com.kiri.dto.SiteDTO">
-   	  select * from site where user_email = #{user_email}
+        select * from site where user_email = #{user_email}
    </select> 
    
    
@@ -178,8 +180,12 @@
 
    <!-- 해당 아이디 그룹 가입한 갯수 -->
    <select id="selectGroupCntByEmail" parameterType="String" resultType="int">
-   		select count(*) from group_member where user_email = #{loginSession_id}
+         select count(*) from group_member where user_email = #{loginSession_id}
    </select>
    
-   
+   <!-- 이메일 배열 갯수 -->
+   <select id = "selectEmail" parameterType = "String" resultType = "int">
+   		select count(*) from group_member where user_email = #{user_email}
+   </select>
+
 </mapper>

@@ -7,7 +7,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>끼리끼리-회원관리</title>
+    <title>관리자-게시판관리</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -291,14 +291,14 @@
 	        <div class="row searchBox">
 	          <div class="d-flex align-items-center m-auto w-75">
 	            <select name="boardNameCategory" class="form-select title w-25 me-3">
-	              <option value="normal">일반</option>
-	              <option value="meeting">모임</option>
+	              <option value="normal">일반 게시판</option>
+	              <option value="meeting">모임 게시판</option>
 	              <option value="notice">공지</option>
 	            </select>
 	            <select id="category" name="category" class="form-select w-25 me-3">
-	              <option value="board_all" selected>ALL</option>
-	              <option value="board_category">CATEGORY</option>
-	              <option value="board_title">TITLE</option>
+	              <option value="board_all" selected>전체</option>
+	              <option value="board_category">카테고리</option>
+	              <option value="board_title">제목</option>
 	            </select>
 	            <input class="form-control keyword me-2" name="keyword" id="searchKeyword" type="text" placeholder="검색" aria-label="Search"/>
 	            <button class="btn btn-outline-primary" type="button" id="searchBtn">Search</button>
@@ -313,7 +313,7 @@
         </div>
         <div class="row resultBox mt-3">
           <table>
-            <thead style="background-color: gainsboro; text-align: center">
+            <thead style="background-color: gainsboro; text-align: center;">
               <tr>
                 <th scope="col" class='col-1'>유형</th>
 				<th scope="col" class='col-5'>제목</th>

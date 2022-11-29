@@ -26,10 +26,8 @@ public class LoginService {
 	}
 	
 	public String loginResult(MemberDTO dto, String type, HttpSession session) throws Exception{  //로그인결과 feat.조용진
-		System.out.println("type"+type);
 		if("N".equals(dto.getUser_blacklist()) && "N".equals(dto.getUser_delete())) {
 			dto.setUser_pw(null);
-			System.out.println(type);
 			session.setAttribute("loginType", type);
 			session.setAttribute("loginSession", dto);
 			

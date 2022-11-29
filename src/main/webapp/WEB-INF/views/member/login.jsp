@@ -18,10 +18,17 @@ rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <style>
 /* header */
-header {
+* {
    font-family: 'MICEGothic Bold';
 }
-
+@font-face {
+	font-family: 'MICEGothic Bold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
 .border-bottom{
     background-color: white;
 }
@@ -279,30 +286,6 @@ footer.footer {
     	let authNum;
     	let loginType = "general"
     	
-//     	$("#findPw_email").on("keyup",function(key){   
-//     		if(key.keyCode==13) {  
-//     			$("#btnFindPW").click();	
-//     		}
-//     	})
-//     	$("#findPw_name").on("keyup",function(key){   
-//     		if(key.keyCode==13) {  
-//     			$("#btnFindPW").click();	
-//     		}
-//     	})
-    	
-//     	$("#findId_name").on("keyup",function(key){   
-//     		if(key.keyCode==13) {  
-//     			$("#btnFindId").click();	
-//     		}
-//     	})
-    	
-//     	$("#find_phone").on("keyup",function(key){   
-//     		if(key.keyCode==13) {  
-//     			$("#btnFindId").click();	
-//     		}
-//     	})
-    	
-    	
     	$("#id").on("keyup",function(key){   
     		if(key.keyCode==13) {  
     			if($("#id").val() == "" || $("#pw").val() == ""){
@@ -353,7 +336,7 @@ footer.footer {
         	let phoneRegex = /^01{1}[016789]{1}[0-9]{7,8}$/;
         	
         	if( $("#findId_name").val() == "" || $("#find_phone").val() ==""){
-        		sweetAlertFail("아이디 혹은 전화번호를 입력해주세요.");
+        		sweetAlertFail("이름 혹은 전화번호를 입력해주세요.");
         		return; 
         		
         	}else if(!phoneRegex.test($("#find_phone").val())){

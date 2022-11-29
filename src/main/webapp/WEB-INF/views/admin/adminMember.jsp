@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>끼리끼리-회원관리</title>
+<title>관리자-회원관리</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -283,7 +283,7 @@ td>a {
 							<td><input class="form-check-input ms-2 me-1"
 								type="checkbox" id="checkAll"></td>
 							<td>신고자</td>
-							<td>문제아</td>
+							<td>피신고자</td>
 							<td>신고 사유</td>
 						</tr>
 					</thead>
@@ -291,7 +291,7 @@ td>a {
 						<c:choose>
 							<c:when test="${reportList.size() == 0}">
 								<tr>
-									<td colspan="3">신고 내역이 없습니다.</td>
+									<td colspan="4">신고 내역이 없습니다.</td>
 								</tr>
 							</c:when>
 							<c:otherwise>

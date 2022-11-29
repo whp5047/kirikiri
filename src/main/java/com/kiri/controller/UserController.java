@@ -99,7 +99,14 @@ public class UserController {
 		@ResponseBody
 		@RequestMapping(value = "/insertreport")
 		public String insertReport(ReportDTO ReportDTO) throws Exception {
-			String rs = report_service.insertReport(ReportDTO);
+			String rs = null;
+			int selectRs =  report_service.selectReport(ReportDTO);
+			System.out.println(selectRs);
+			if(selectRs > 0) {
+				rs = "noMore";				
+			}else {
+				rs = report_service.insertReport(ReportDTO);
+			}
 			return rs;
 		}	
 

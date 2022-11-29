@@ -29,7 +29,15 @@
     font-weight: normal;
     font-style: normal;
 }
-*{box-sizing: border-box;   font-family: 'InfinitySans-RegularA1';}
+@font-face {
+	font-family: 'MICEGothic Bold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
+*{box-sizing: border-box;   font-family: 'MICEGothic Bold';}
 body{
     background-color: #d2e3ec;
     height: auto;
@@ -96,7 +104,7 @@ header {
 /* 바디*/
 .signupBox{
     margin-top: 100px;
-    width: 1000px;
+    width: 60%;
     height: auto;
     border: 1px solid d2e3ec;
     text-align: center;
@@ -715,13 +723,17 @@ span{
       	 	   $("#email-domain").focus();
  	       	   return;
  	       	auth = comfirm;
-           }else if(auth !== "comfirm"){
-      	 	   sweetAlertFail("이메일 인증을 완료해주세요.");
-      	 	   $("#email_id").focus();
- 	       	   return;
+//              }else if(auth !== "comfirm"){
+//        	 	   sweetAlertFail("이메일 인증을 완료해주세요.");
+//        	 	   $("#email_id").focus();
+//   	       	   return; 
 
            }else if($("#user_pw").val() === "" || $("#pwCheck").val() === ""){
         	   sweetAlertFail("비밀번호를 입력해주세요.");
+           	   return;
+           	   
+           }else if($("#user_pw").val() === $("#email_id").val()){
+        	   sweetAlertFail("아이디와 비밀번호를 동일하게 설정하지 말아주세요.");
            	   return;
 
            }else if($("#email-id").val() === $("#user_pw").val()){

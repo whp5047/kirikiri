@@ -654,8 +654,11 @@
        // 페이징
        $(".move").on("click", function(e){
           e.preventDefault();
-
-          $("#moveForm").append("<input type='hidden' name='seq_group_board' value='" + $(this).attr("href")+"'>");
+          if($("#seq_gboardInput").length == 1){
+              $("#seq_gboardInput").remove();
+           }
+          
+          $("#moveForm").append("<input type='hidden' name='seq_group_board' id = 'seq_gboardInput' value='" + $(this).attr("href")+"'>");
           $("#moveForm").attr("action", "/Gboard/toDetailView");
           $("#moveForm").submit();
        });

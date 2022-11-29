@@ -1,29 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <link
-   href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-   rel="stylesheet">
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 <script
-   src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-   integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-   crossorigin="anonymous"></script>
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous"></script>
 <!--구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Open+Sans:ital,wght@1,300&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Open+Sans:ital,wght@1,300&display=swap"
+	rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"
-   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-   crossorigin="anonymous"></script>
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
 <!-- AOS 라이브러리 불러오기-->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <!-- 아이콘 -->
 <script src="https://kit.fontawesome.com/f9358a6ceb.js"
-   crossorigin="anonymous"></script>
+	crossorigin="anonymous"></script>
 <!-- Bootstrap icons-->
 <link
    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -32,19 +34,31 @@
 <title>끼리끼리</title>
 <style>
 * {
-   box-sizing: border-box;
-   font-family: 'MICEGothic Bold';
+	box-sizing: border-box;
+	font-family: 'MICEGothic Bold';
 }
+
 @font-face {
-   font-family: 'MICEGothic Bold';
-   src:
-       url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
-   font-weight: 700;
-   font-style: normal;
+	font-family: 'MICEGothic Bold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
 }
+
 @font-face {
-    font-family: 'SDSamliphopangche_Outline';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+	font-family: 'SDSamliphopangche_Outline';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+    font-family: 'RixInooAriDuriR';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
@@ -80,7 +94,9 @@
                   display: none;
                }
             }
-
+header {
+    font-family: 'MICEGothic Bold';
+}
             /* header */
             #navLogo {
                width: 150px;
@@ -156,7 +172,7 @@
             /*모임영역 카드6개*/
             /* body menu */
             .menu {
-               background-color: #e0ecf3;
+               background-color: #d2e3ec;
                width: 100%;
                height: 100px;
                align-items: center;
@@ -192,10 +208,11 @@
             }
 
             .text {
-               color: #1d76c9;
+               color: black;
                font-weight: bold;
                font-size: 30px;
                cursor: pointer;
+               font-family: 'RixInooAriDuriR';
             }
 
             .text:hover {
@@ -210,7 +227,7 @@
             .contentBest {
                width: 100%;
                margin-bottom: 0px;
-               background-color: #fbfbdf;
+               background-color: #d2e3ec42;
                margin-left: 0px;
             }
 
@@ -220,12 +237,12 @@
 
             .card {
                width: 350px;
-               border: 3px solid #d5f1d5;
+               border: 3px solid #b5cdd9;
                cursor: pointer;
             }
 
             .card-body {
-               background-color: #f4fdef;
+               background-color: #fafdff;
                padding-bottom: 0px;
             }
 
@@ -432,7 +449,7 @@ footer.footer {
                content: '';
                position: absolute;
                top: 0;
-               width: var(--dot-w);
+               width: 20px;
                height: 100%;
                border-radius: 100%;
                transition: all 300ms ease;
@@ -558,13 +575,13 @@ footer.footer {
                   </ul>
                </div>
 
-               <!-- logo -->
-               <div class="col-2">
-                  <a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
-                     id="logoImgs" src="/resources/images/kiri.jpg">
+					<!-- logo -->
+					<div class="col-2">
+						<a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
+							id="logoImgs" src="/resources/images/kiri.jpg">
 
-                  </a>
-               </div>
+						</a>
+					</div>
 
                <div class="col-5">
                   <div class="row align-items-center justify-content-center">
@@ -671,41 +688,41 @@ footer.footer {
             </div>
 
 
-      <!--원그림-->
-      <div class="row">
-         <div
-            class="circleBox col-md-4 d-flex flex-column justify-content-center align-items-center">
-            <div class="circleImg" data-aos="flip-left" data-aos-duration="1000">
-               <img src="/resources/images/aksu.png" id="circle_img">
-            </div>
-            <div class="w-100">
-               <p class="text-center mt-4 circleTitle">그룹 가입하기</p>
-               <p>공통된 관심사인 사람을 만나고, 자신의 커뮤니티를 찾아보세요.</p>
-            </div>
-         </div>
-         <div
-            class="circleBox col-md-4 d-flex flex-column justify-content-center align-items-center">
-            <div class="circleImg" data-aos="flip-left" data-aos-duration="1000"
-               data-aos-delay="100">
-               <img src="/resources/images/dodbogi.png" id="circle_img">
-            </div>
-            <div class="w-100">
-               <p class="text-center mt-4 circleTitle">이벤트 찾기</p>
-               <p>자신이 생각하시는 모든 주제에 대한 이벤트가 이루어집니다!</p>
-            </div>
-         </div>
-         <div
-            class="circleBox col-md-4 d-flex flex-column justify-content-center align-items-center">
-            <div class="circleImg" data-aos="flip-left" data-aos-duration="1000"
-               data-aos-delay="200">
-               <img src="/resources/images/update_chatting.png" id="circle_img">
-            </div>
-            <div class="w-100">
-               <p class="text-center mt-4 circleTitle">모임간 소통</p>
-               <p>사람들을 모으고 공통의 관심사를 찾기 위해 전문가가 될 필요는 없죠!</p>
-            </div>
-         </div>
-      </div>
+		<!--원그림-->
+		<div class="row">
+			<div
+				class="circleBox col-md-4 d-flex flex-column justify-content-center align-items-center">
+				<div class="circleImg" data-aos="flip-left" data-aos-duration="1000">
+					<img src="/resources/images/aksu.png" id="circle_img">
+				</div>
+				<div class="w-100">
+					<p class="text-center mt-4 circleTitle">그룹 가입하기</p>
+					<p>공통된 관심사인 사람을 만나고, 자신의 커뮤니티를 찾아보세요.</p>
+				</div>
+			</div>
+			<div
+				class="circleBox col-md-4 d-flex flex-column justify-content-center align-items-center">
+				<div class="circleImg" data-aos="flip-left" data-aos-duration="1000"
+					data-aos-delay="100">
+					<img src="/resources/images/dodbogi.png" id="circle_img">
+				</div>
+				<div class="w-100">
+					<p class="text-center mt-4 circleTitle">이벤트 찾기</p>
+					<p>자신이 생각하시는 모든 주제에 대한 이벤트가 이루어집니다!</p>
+				</div>
+			</div>
+			<div
+				class="circleBox col-md-4 d-flex flex-column justify-content-center align-items-center">
+				<div class="circleImg" data-aos="flip-left" data-aos-duration="1000"
+					data-aos-delay="200">
+					<img src="/resources/images/update_chatting.png" id="circle_img">
+				</div>
+				<div class="w-100">
+					<p class="text-center mt-4 circleTitle">모임간 소통</p>
+					<p>사람들을 모으고 공통의 관심사를 찾기 위해 전문가가 될 필요는 없죠!</p>
+				</div>
+			</div>
+		</div>
 
       <!--가입 하기 버튼-->
       <div class="row mt-2">
@@ -729,7 +746,7 @@ footer.footer {
          <div class="content-1" data-aos="fade-left" data-aos-duration="1000">
             <div class="row g-0 align-items-center">
                <c:if test="${boardList eq null}">
-                     "없습니다~";
+                     없습니다~
                </c:if>
                <c:if test="${boardList ne null}">
                   <div class="col-xl-6 text-end px-5">
@@ -757,10 +774,10 @@ footer.footer {
                   </div>
                   <div class="mainImg col-xl-6 ms-auto d-flex align-items-center">
                      <c:if test="${sysList.get(0) eq null }">
-                        <img src="/resources/images/찜2.jpg" class="img-fluid">
+                        <img src="/resources/images/찜2.jpg"  class="img-fluid">
                      </c:if>
                      <c:if test="${sysList.get(0) ne null }">
-                        <img src="/boardFile/${sysList.get(0)}" class="img-fluid">
+                        <img src="/boardFile/${sysList.get(0)}" style="max-height : 400px; width : 100%;">
                      </c:if>
                   </div>
                </c:if>
@@ -771,7 +788,7 @@ footer.footer {
             data-aos-duration="1000">
             <div class="row g-0 mt-5 align-items-center">
                <c:if test="${boardList eq null}">
-                        "없습니다~";
+                        없습니다~
                      </c:if>
                <c:if test="${boardList.size()>=2}">
                   <div class="mainImg col-xl-6 mb-4 mb-lg-0">
@@ -779,7 +796,7 @@ footer.footer {
                         <img src="/resources/images/찜2.jpg" class="img-fluid">
                      </c:if>
                      <c:if test="${sysList.get(1) ne null }">
-                        <img src="/boardFile/${sysList.get(1)}" class="img-fluid">
+                        <img src="/boardFile/${sysList.get(1)}" style="max-height : 400px; width : 100%;">
                      </c:if>
                   </div>
                   <div class="col-xl-6 ms-auto pe-5 px-5">
@@ -809,60 +826,60 @@ footer.footer {
          </div>
       </div>
 
-      <!-- 애플리케이션 -->
-      <div class="acontainer mt-5">
-         <div class="row mt-3">
-            <div
-               class="col-md-5 phoneImgBox d-flex align-items-center justify-content-center">
-               <img src="/resources/images/smartphone.png">
-            </div>
-            <div
-               class="col-md-7 d-flex align-items-center justify-content-center">
-               <div
-                  class="phoneTextBox d-flex flex-column justify-content-center align-items-center mt-2">
-                  <div class="downloadHead">
-                     <h1>
-                        <span style="font-size: 50px; color: #4285f4;">끼</span><span
-                           style="font-size: 50px; color: #9e9e9e;">리</span><span
-                           style="font-size: 50px; color: #4285f4;">끼</span><span
-                           style="font-size: 50px; color: #9e9e9e;">리</span> 모바일 앱 출시!
-                     </h1>
-                  </div>
-                  <div class="downloadTtitle mt-3">
-                     <strong>이제 끼리끼리를 앱에서도 사용할 수 있습니다.</strong>
-                  </div>
-                  <div class="downloadContent">
-                     <label><strong style="font-size: 30px;">남은 시간</strong><br></label>
-                     <strong id="sample01" style="color: red"></strong>
-                  </div>
-                  <div class="downloadBtn mt-3 d-flex">
-                     <div class="row appBox">
-                        <div class="col-4 text-center mt-1" style="color: #fff;">
-                           <i class="fa-brands fa-apple w-100 appleLogo"></i>
-                        </div>
-                        <div
-                           class="col-8 appBoxText d-flex flex-column justify-content-center"
-                           style="color: #fff;">
-                           <span><strong>AppStore</strong>에서</span> <span
-                              class="downLoadSmallText">다운로드 하기</span>
-                        </div>
-                     </div>
-                     <div class="row appBox ms-5">
-                        <div class="col-4 text-center mt-1" style="color: #fff;">
-                           <i class="fa-brands fa-google-play w-100 googleLogo"></i>
-                        </div>
-                        <div
-                           class="col-8 appBoxText d-flex flex-column justify-content-center"
-                           style="color: #fff;">
-                           <span><strong>Android</strong>에서</span> <span
-                              class="downLoadSmallText">다운로드 하기</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
+		<!-- 애플리케이션 -->
+		<div class="acontainer mt-5">
+			<div class="row mt-3">
+				<div
+					class="col-md-5 phoneImgBox d-flex align-items-center justify-content-center">
+					<img src="/resources/images/smartphone.png">
+				</div>
+				<div
+					class="col-md-7 d-flex align-items-center justify-content-center">
+					<div
+						class="phoneTextBox d-flex flex-column justify-content-center align-items-center mt-2">
+						<div class="downloadHead">
+							<h1>
+								<span style="font-size: 50px; color: #4285f4;">끼</span><span
+									style="font-size: 50px; color: #9e9e9e;">리</span><span
+									style="font-size: 50px; color: #4285f4;">끼</span><span
+									style="font-size: 50px; color: #9e9e9e;">리</span> 모바일 앱 출시!
+							</h1>
+						</div>
+						<div class="downloadTtitle mt-3">
+							<strong>이제 끼리끼리를 앱에서도 사용할 수 있습니다.</strong>
+						</div>
+						<div class="downloadContent">
+							<label><strong style="font-size: 30px;">남은 시간</strong><br></label>
+							<strong id="sample01" style="color: red"></strong>
+						</div>
+						<div class="downloadBtn mt-3 d-flex">
+							<div class="row appBox">
+								<div class="col-4 text-center mt-1" style="color: #fff;">
+									<i class="fa-brands fa-apple w-100 appleLogo"></i>
+								</div>
+								<div
+									class="col-8 appBoxText d-flex flex-column justify-content-center"
+									style="color: #fff;">
+									<span><strong>AppStore</strong>에서</span> <span
+										class="downLoadSmallText">다운로드 하기</span>
+								</div>
+							</div>
+							<div class="row appBox ms-5">
+								<div class="col-4 text-center mt-1" style="color: #fff;">
+									<i class="fa-brands fa-google-play w-100 googleLogo"></i>
+								</div>
+								<div
+									class="col-8 appBoxText d-flex flex-column justify-content-center"
+									style="color: #fff;">
+									<span><strong>Android</strong>에서</span> <span
+										class="downLoadSmallText">다운로드 하기</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
       <!-- 모임 나타나기 -->
       <!-- menubar -->
@@ -1069,7 +1086,9 @@ footer.footer {
          </footer>
       </div>
    </div>
-   <script>
+
+
+	<script>
    <!-- 모임생성 고! 버튼 -->
    let check = "${loginSession.user_email}";
     $(".button").on("click", function(){

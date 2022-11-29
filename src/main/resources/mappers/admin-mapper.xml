@@ -5,11 +5,11 @@
 
  <mapper namespace="adminMapper">
  	<select id="selectAllMember" parameterType="map" resultType="com.kiri.dto.MemberDTO">
- 		select * from (select member.*, row_number() over(order by 1 desc) as num from member)
+ 		select * from (select member.*, row_number() over(order by 1 desc) as num from member where user_email != 'admin')
 				where num between #{start} and #{end}
  	</select>
  	<select id="getPageNavi" resultType="int">
- 		select count(*) as totalCnt from member
+ 		select count(*) as totalCnt from member where user_email != 'admin'
  	</select>
  	<select id="selectReport" resultType="com.kiri.dto.ReportDTO">
  		select * from report
@@ -28,8 +28,8 @@
  	</update>
  	<select id="searchMember" parameterType="map" resultType="com.kiri.dto.MemberDTO">
  		select * from member where
-			<if test="searchType == 'all'">user_email like '%${searchKeyword}%' or user_nickname like '%${searchKeyword}%'or user_phone like '%${searchKeyword}%' </if>
-			<if test="searchType != 'all'">${searchType} like '%' || #{searchKeyword} || '%'</if>
+			<if test="searchType == 'all'">(user_email like '%${searchKeyword}%' or user_nickname like '%${searchKeyword}%'or user_phone like '%${searchKeyword}%') and user_email != 'admin' </if>
+			<if test="searchType != 'all'">${searchType} like '%' || #{searchKeyword} || '%' and user_email != 'admin' </if>
 			order by 1
  	</select>
  	<select id="selectDetailMem" resultType="com.kiri.dto.MemberDTO" parameterType="String">
@@ -165,7 +165,7 @@
 
  	<!-- 페이지네이션 BoardCnt -->
  	<select id="getBoardPageNavi" resultType="int">
- 		select count(*) as totalCnt from board
+ 		select count(*) as totalCnt from board where board_category not like '%공지%'
  	</select>
 
  	<!-- 김영완 07_22 -->

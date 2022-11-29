@@ -81,7 +81,7 @@ public class LoginController {
 				return "admin";
 				
 			}else {
-				return "error";
+				return "loginFail";
 			}
 			
 		}else { // 맴버는 조회 되었는데 타입에 오류 발생 
@@ -138,6 +138,12 @@ public class LoginController {
 		cookie.setPath("/");
 		response.addCookie(cookie);
 		
+		// 그룹 쿠키
+		Cookie gcookie = new Cookie("groupPostView", null);
+		gcookie.setMaxAge(0);
+		gcookie.setPath("/");
+		response.addCookie(gcookie);
+				
 		if(session.getAttribute("loginType").equals("kakao")) {
 			String accessToken = (String)session.getAttribute("accessToken");
 			kakaoLogin.kakaoLogout(accessToken, "https://kapi.kakao.com/v1/user/logout");

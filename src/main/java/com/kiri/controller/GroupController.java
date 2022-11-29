@@ -55,9 +55,9 @@ public class GroupController {
    @RequestMapping(value = "/groupAccess")
    @ResponseBody
    public String groupAccess(Group_MemberDTO Group_MemberDTO) throws Exception {
-	  System.out.println(Group_MemberDTO);
 
-	  tbl_group_service.groupAccess(Group_MemberDTO);
+
+     tbl_group_service.groupAccess(Group_MemberDTO);
 
       String email = ((MemberDTO)session.getAttribute("loginSession")).getUser_email();
       Group_MemberDTO.setUser_email(email);
@@ -69,21 +69,18 @@ public class GroupController {
    }
 
    // 멤버관리에서 멤버 강퇴(o)
-	 @RequestMapping(value = "/deleteMember")
-	 @ResponseBody 
-	 public String groupMemberDelete(@RequestBody Map<String, Object> param) throws Exception { 
-		 List<String> userEmails = new ObjectMapper().readValue(param.get("userEmails").toString(), List.class);
-		 int seq_group = Integer.parseInt(param.get("seq_group").toString());
+    @RequestMapping(value = "/deleteMember")
+    @ResponseBody 
+    public String groupMemberDelete(@RequestBody Map<String, Object> param) throws Exception { 
+       List<String> userEmails = new ObjectMapper().readValue(param.get("userEmails").toString(), List.class);
+       int seq_group = Integer.parseInt(param.get("seq_group").toString());
 
-		 System.out.println("================================");
-		 System.out.println(seq_group);
-		 System.out.println(userEmails);
-		 System.out.println("================================");
-		 tbl_group_service.groupMemberDelete(userEmails, seq_group); 
-	  
-	  return String.valueOf(userEmails); 
-	 }
-	 
+
+       tbl_group_service.groupMemberDelete(userEmails, seq_group); 
+     
+     return String.valueOf(userEmails); 
+    }
+    
 
    // 모임가입 이동(o)
    @RequestMapping(value = "/toGroupApply")
@@ -105,8 +102,9 @@ public class GroupController {
    public String completeApply(@RequestBody Map<String, Object> param, int group_people, int groupCount)
          throws Exception {
       List<String> userEmails = new ObjectMapper().readValue(param.get("userEmails").toString(), List.class);
+     int seq_group = Integer.parseInt(param.get("seq_group").toString());
       if (userEmails.size() + groupCount <= group_people) {
-         tbl_group_service.completeApply(userEmails);
+         tbl_group_service.completeApply(userEmails, seq_group);
       } else if (userEmails.size() + groupCount > group_people) {
          return "error";
       }
@@ -119,14 +117,16 @@ public class GroupController {
    @ResponseBody
    public String denyApply(@RequestBody Map<String, Object> param) throws Exception {
       List<String> userEmails = new ObjectMapper().readValue(param.get("userEmails").toString(), List.class);
-      tbl_group_service.denyApply(userEmails);
+      int seq_group = Integer.parseInt(param.get("seq_group").toString());
+      tbl_group_service.denyApply(userEmails,seq_group);
+
       return String.valueOf(userEmails);
    }
 
    // 모임해산 이동(o)
    @RequestMapping(value = "/toGroupDelete")
    public String toGroupDelete(int seq_group, Model model) {
-	   model.addAttribute("seq_group", seq_group);
+      model.addAttribute("seq_group", seq_group);
       return "group/groupDelete";
    }
 
@@ -144,11 +144,11 @@ public class GroupController {
    // 모임 생성페이지로 이동
    @RequestMapping(value = "/toCreateGroup")
    public String toMakeGroup(Model model) {
-	   // 세션 아이디, 닉네임 session에서 뽑아올 값
-	   String user_email = ((MemberDTO) session.getAttribute("loginSession")).getUser_email();
-	   int totalGroupCntById = tbl_group_service.selectGroupCntByEmail(user_email);
-	   model.addAttribute("totalGroupCntById",totalGroupCntById); // 현재 아이디의 모임 가입한 갯수
-	   return "/group/createGroup";
+      // 세션 아이디, 닉네임 session에서 뽑아올 값
+      String user_email = ((MemberDTO) session.getAttribute("loginSession")).getUser_email();
+      int totalGroupCntById = tbl_group_service.selectGroupCntByEmail(user_email);
+      model.addAttribute("totalGroupCntById",totalGroupCntById); // 현재 아이디의 모임 가입한 갯수
+      return "/group/createGroup";
    }
 
    // 그룹 만들기
@@ -188,15 +188,15 @@ public class GroupController {
       return "redirect:/";
    }
 
-	// 썸머노트 이미지
-	@RequestMapping(value = "/summernoteImg", produces = "application/json") // summernote 이미지 업로드
-	@ResponseBody
-	public String uploadSummernoteImg(@RequestParam("file") MultipartFile file) throws Exception {
-		String realPath = session.getServletContext().getRealPath("boardFile");
-		JsonObject jsonObject = tbl_group_service.uploadSummernoteImg(file, realPath);
-		String result = jsonObject.toString();
-		return result;
-	}
+   // 썸머노트 이미지
+   @RequestMapping(value = "/summernoteImg", produces = "application/json") // summernote 이미지 업로드
+   @ResponseBody
+   public String uploadSummernoteImg(@RequestParam("file") MultipartFile file) throws Exception {
+      String realPath = session.getServletContext().getRealPath("boardFile");
+      JsonObject jsonObject = tbl_group_service.uploadSummernoteImg(file, realPath);
+      String result = jsonObject.toString();
+      return result;
+   }
    
    //썸머노트 이미지 삭제 요청
    @RequestMapping(value = "/delImg") 
@@ -220,22 +220,22 @@ public class GroupController {
       return "/group/modifyGroup";
    }
 
-	// 수정페이지
-	@RequestMapping(value = "/modifyGroup")
-	public String modifyGroup(Tbl_GroupDTO tbl_group_dto, MultipartFile groupFile, HttpSession session) throws Exception {
-		int seq_group = tbl_group_dto.getSeq_group(); // 현재 시퀀스 번호 얻어오기
-		// 사진을 넣었다면 실행
-		if (!groupFile.isEmpty()) {
-			System.out.println("hello!!");
-			// 그룹 프로필 사진 저장(group_profile)
-			String realPath = session.getServletContext().getRealPath("group_profile");
-			String sys_name = tbl_group_service.uploadProfile(groupFile, realPath);
-			String ori_name = groupFile.getOriginalFilename();
-			// sys_name setter 설정
-			tbl_group_dto.setSys_name(sys_name);
-			// ori_name setter 설정
-			tbl_group_dto.setOri_name(ori_name);
-		}
+   // 수정페이지
+   @RequestMapping(value = "/modifyGroup")
+   public String modifyGroup(Tbl_GroupDTO tbl_group_dto, MultipartFile groupFile, HttpSession session) throws Exception {
+      int seq_group = tbl_group_dto.getSeq_group(); // 현재 시퀀스 번호 얻어오기
+      // 사진을 넣었다면 실행
+      if (!groupFile.isEmpty()) {
+
+         // 그룹 프로필 사진 저장(group_profile)
+         String realPath = session.getServletContext().getRealPath("group_profile");
+         String sys_name = tbl_group_service.uploadProfile(groupFile, realPath);
+         String ori_name = groupFile.getOriginalFilename();
+         // sys_name setter 설정
+         tbl_group_dto.setSys_name(sys_name);
+         // ori_name setter 설정
+         tbl_group_dto.setOri_name(ori_name);
+      }
       // 수정
       tbl_group_service.modifyGroup(tbl_group_dto);
       return "redirect:/group/toGroupDetail?seq_group=" + seq_group;
@@ -271,8 +271,7 @@ public class GroupController {
       mapList.get("TableJoinDTO");
       // 해당 아이디가 가입된 그룹 갯수 출력
       int totalGroupCntById = tbl_group_service.selectGroupCntByEmail(loginSession_id);
-      System.out.println("asdasdasd");
-      System.out.println(mapList.get("TableJoinDTO"));
+      
       
       
       model.addAttribute("tbl_group_dto", tbl_group_dto); // 해당 그룹 내용 가져오기
@@ -311,7 +310,7 @@ public class GroupController {
    @ResponseBody
    @RequestMapping(value = "/applyGroupMember")
    public String applyGroupMember(Group_ApplyDTO group_apply_dto) throws Exception {
-	   String loginSession_id = ((MemberDTO) session.getAttribute("loginSession")).getUser_email(); // 현재 세션 아이디
+      String loginSession_id = ((MemberDTO) session.getAttribute("loginSession")).getUser_email(); // 현재 세션 아이디
        String loginSession_nickName = ((MemberDTO) session.getAttribute("loginSession")).getUser_nickname(); // 현재 세션 닉네임
        String loginSession_bd = ((MemberDTO) session.getAttribute("loginSession")).getUser_bd(); // 현재 세션 생일
        
@@ -346,38 +345,31 @@ public class GroupController {
    @Autowired
    private Group_ChatService gcService;
 
-	@RequestMapping(value = "/toChat") // 채팅 페이지 요청
-	public String chat(Model model, int seq_group) throws Exception {
-		//session에서 받아온 닉네임
-		// 현재 세션 아이디
-		String user_nickname = ((MemberDTO) session.getAttribute("loginSession")).getUser_nickname();
-		System.out.println(user_nickname);
-		
-		model.addAttribute("user_nickname", user_nickname);
-		System.out.println(seq_group);
-		model.addAttribute("seq_group", seq_group);
-		// 채팅 했던 부분 불러오기
-		List<Group_ChatDTO> gcList = gcService.selectChat(seq_group);
-		model.addAttribute("gcList", gcList);
-		System.out.println("그룹 채팅");
-		System.out.println(gcList.toString());
-		// 그룹정보 가져오기(채팅방, 사람 수)
-		List<Tbl_GroupDTO> tgList = gcService.selectGroup(seq_group);
-		model.addAttribute("tgList", tgList);
-		System.out.println("채팅방, 사람 수");
-		System.out.println(tgList.toString());
-		
+   @RequestMapping(value = "/toChat") // 채팅 페이지 요청
+   public String chat(Model model, int seq_group) throws Exception {
+      //session에서 받아온 닉네임
+      // 현재 세션 아이디
+      String user_nickname = ((MemberDTO) session.getAttribute("loginSession")).getUser_nickname();
+      
+      model.addAttribute("user_nickname", user_nickname);
+
+      model.addAttribute("seq_group", seq_group);
+      // 채팅 했던 부분 불러오기
+      List<Group_ChatDTO> gcList = gcService.selectChat(seq_group);
+      model.addAttribute("gcList", gcList);
+
+      // 그룹정보 가져오기(채팅방, 사람 수)
+      List<Tbl_GroupDTO> tgList = gcService.selectGroup(seq_group);
+      model.addAttribute("tgList", tgList);
+
+      
       // 닉네임 리스트 가져와서 프로필 사진 member에서 꺼내오기
       List<Group_MemberDTO> nickList = gcService.selectNick(seq_group);
-      System.out.println("닉리스트" + nickList.toString());
+
       List<String> profileList = new ArrayList<>();
       for (Group_MemberDTO dto : nickList) {
          user_nickname = dto.getUser_nickname();
-         System.out.println(user_nickname);
          MemberDTO mdto = gcService.getProfileImg(user_nickname);
-         System.out.println(mdto.toString());
-         System.out.println("안녕하세요!!");
-         System.out.println(mdto.getUser_image());
          profileList.add(mdto.getUser_image());
       }
 

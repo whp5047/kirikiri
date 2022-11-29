@@ -109,7 +109,7 @@ body {
 }
 .signupBox {
 	margin-top: 100px;
-	width: 1000px;
+	width: 60%;
 	height: auto;
 	border: 1px solid d2e3ec;
 	text-align: center;

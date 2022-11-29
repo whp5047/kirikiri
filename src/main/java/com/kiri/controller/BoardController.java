@@ -1,6 +1,7 @@
 package com.kiri.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
 import com.kiri.dto.BoardDTO;
+import com.kiri.dto.Board_CommentDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.service.BoardService;
 import com.kiri.utills.Criteria;
@@ -98,7 +100,7 @@ public class BoardController {
 	@ResponseBody
 	public String uploadSummernoteImg(@RequestParam("file") MultipartFile file) throws Exception{
 		String realPath = session.getServletContext().getRealPath("boardFile");
-//		System.out.println("realPath : " + realPath);
+
 		JsonObject jsonObject = service.uploadSummernoteImg(file, realPath);
 		
 		String result = jsonObject.toString();
@@ -145,8 +147,6 @@ public class BoardController {
 		}
 		// 좋아요 여부, 개수
 		model.addAttribute("like", service.like(seq_board, user_email));
-		// 댓글 프로필
-		model.addAttribute("profile", service.getProfileImg(user_email));
 		
 		// criteria 인스턴스 전달
 		model.addAttribute("cri", cri);
@@ -182,7 +182,6 @@ public class BoardController {
 	@ResponseBody
 	public String delImg(String src) throws Exception {
 		String path = session.getServletContext().getRealPath("boardFile");
-		System.out.println("src : " + src);
 		service.delFile(path, src);
 		return "success";
 	}

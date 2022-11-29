@@ -20,8 +20,7 @@ public class GroupCalendarDAO {
 	// 일정 삽입
 	public void insert(Group_CalendarDTO dto) {
 		int rs = session.insert("calMapper.calInsert", dto);
-		if(rs > 0) System.out.println("데이터 삽입 성공");
-		else System.out.println("데이터 삽입 실패");
+
 	}
 	
 	// 일정 전체 조회

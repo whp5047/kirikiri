@@ -50,9 +50,9 @@ public class Group_BoardService {
 	}
 	
 	// 댓글 프로필 조회
-	public String getProfileImg(String user_email) throws Exception{
-		return commentDAO.getProfileImgG(user_email);
-	}
+//	public String getProfileImg(String user_email) throws Exception{
+//		return commentDAO.getProfileImgG(user_email);
+//	}
 
 	// 조회수 + 1
 	public void viewCntUp(int seq_group_board) throws Exception {
@@ -95,7 +95,7 @@ public class Group_BoardService {
 		String ori_name = file.getOriginalFilename();
 		String saveName = UUID.randomUUID() + "_" + ori_name;
 		File targetFile = new File(realPath + File.separator + saveName);
-		System.out.println(targetFile.toString());
+
 
 		try {
 			System.out.println("이미지 저장 성공");
@@ -105,7 +105,7 @@ public class Group_BoardService {
 			jsonObject.addProperty("url", "/groupBoardFile/" + saveName);
 			jsonObject.addProperty("responseCode", "success");
 		} catch (Exception e) {
-			System.out.println("이미지 저장 실패");
+
 			FileUtils.deleteQuietly(targetFile); // 저장된 파일 삭제
 			jsonObject.addProperty("responseCode", "error");
 			e.printStackTrace();
@@ -132,7 +132,7 @@ public class Group_BoardService {
 
 		if (src.length() != 0) {
 			File file = new File(path + File.separator + src);
-			System.out.println(file.toString());
+
 			if (file.exists()) {
 				file.delete();
 				fileDAO.delete(src);

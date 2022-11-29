@@ -40,7 +40,7 @@
 <!-- 아이콘 -->
 <script src="https://kit.fontawesome.com/f9358a6ceb.js"
    crossorigin="anonymous"></script>
-<title>Insert title here</title>
+<title>카테고리별 모임</title>
 
 <style>
 
@@ -157,13 +157,13 @@ ul {
 
 /* body content */
 .content {
-   width: 100%;
-   margin-top: 40px;
+    width: 100%;
+    margin-top: 40px;
     margin-bottom: 0px;
-   background-color: #fbfbdf;
-   border-top: 5px solid #ffd766;
-   border-bottom: 5px solid #ffd766;
-   padding-right: 100px;
+    background-color: #f7f9ff;
+    border-top: 5px solid #8d9ee0;
+    border-bottom: 5px solid #8d9ee0;
+    padding-right: 100px;
     padding-left: 100px;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -171,13 +171,13 @@ ul {
 }
 
 .card {
-   width:350px;
-    border: 3px solid #d5f1d5;
+width: 350px;
+    border: 4px solid #8d9ee0;
     cursor: pointer;
 }
 .card-body{
-   background-color : #f4fdef;
-   padding-bottom:0px;   
+    background-color: #ffffff;
+    padding-bottom: 0px; 
 }
 .card>img {
    width: 100%;
@@ -238,7 +238,6 @@ footer.footer {
 /*슬라이드*/
 img {
    max-width: 100%;
-   height: auto;
 }
 
 .slider {
@@ -410,57 +409,57 @@ body {
    
    
    /* 모임 생성 버튼*/
-            @import url(https://fonts.googleapis.com/css?family=Roboto:700);
+   @import url(https://fonts.googleapis.com/css?family=Roboto:700);
 
-            .button {
-               background: #3D4C53;
-               width: 200px;
-               height: 50px;
-               overflow: hidden;
-               text-align: center;
-               transition: .2s;
-               cursor: pointer;
-               border-radius: 3px;
-               box-shadow: 0px 1px 2px rgba(0, 0, 0, .2);
-            }
+   .button {
+      background: #3D4C53;
+      width: 200px;
+      height: 50px;
+      overflow: hidden;
+      text-align: center;
+      transition: .2s;
+      cursor: pointer;
+      border-radius: 3px;
+      box-shadow: 0px 1px 2px rgba(0, 0, 0, .2);
+   }
 
-            .btnTwo {
-               position: relative;
-               width: 200px;
-               height: 100px;
-               margin-top: -100px;
-               padding-top: 2px;
-               background: #26A69A;
-               left: -250px;
-               transition: .3s;
-            }
+   .btnTwo {
+      position: relative;
+      width: 200px;
+      height: 100px;
+      margin-top: -100px;
+      padding-top: 2px;
+      background: #26A69A;
+      left: -250px;
+      transition: .3s;
+   }
 
-            .btnText {
-               color: white;
-               padding-top: 13px;
-               transition: .3s;
-            }
+   .btnText {
+      color: white;
+      padding-top: 13px;
+      transition: .3s;
+   }
 
-            .btnText2 {
-               margin-top: 60px;
-               margin-right: -130px;
-               color: #FFF;
-            }
+   .btnText2 {
+      margin-top: 60px;
+      margin-right: -130px;
+      color: #FFF;
+   }
 
-            .button:hover .btnTwo {
-               /*When hovering over .button change .btnTwo*/
-               left: -130px;
-            }
+   .button:hover .btnTwo {
+      /*When hovering over .button change .btnTwo*/
+      left: -130px;
+   }
 
-            .button:hover .btnText {
-               /*When hovering over .button change .btnText*/
-               margin-left: 65px;
-            }
+   .button:hover .btnText {
+      /*When hovering over .button change .btnText*/
+      margin-left: 65px;
+   }
 
-            .button:active {
-               /*Clicked and held*/
-               box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.3);
-            }
+   .button:active {
+      /*Clicked and held*/
+      box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.3);
+   }
    
 </style>
 

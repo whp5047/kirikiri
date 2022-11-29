@@ -65,10 +65,10 @@ public class AdminController {
 	      }else {
 	         for(int seq_report : seqArray) {
 	               rdto = service.selectReportBySeq(seq_report);
-	               bdto = new BlackListDTO(0, rdto.getReport_receive(), null, rdto.getReport_reason());
+	               bdto = new BlackListDTO(0, rdto.getReceive_email(), null, rdto.getReport_reason());
 	               service.insertBl(bdto);
 	               service.deleteReport(seq_report);
-	               service.updateBl(rdto.getReport_receive());
+	               service.updateBl(rdto.getReceive_email());
 	           }
 	         return "success";
 	      }
@@ -105,6 +105,8 @@ public class AdminController {
    @RequestMapping(value="/toDetailMem")
    public String toDetailMem(String user_email, Model model) throws Exception{
       MemberDTO memList = service.selectDetailMem(user_email);
+      String date = memList.getUser_bd().substring(0, 10);
+      memList.setUser_bd(date);
       model.addAttribute("memList", memList);
       return "admin/memberDetail";
    }
@@ -155,15 +157,14 @@ public class AdminController {
    @RequestMapping(value = "/toDeleteGroup")
    public String deleteGroup(int seq_group) throws Exception{
    service.deleteGroup(seq_group);
-   System.out.println("그룹 번호 : " + seq_group);
+
    return "redirect:/admin/toGroupAdmin?curPage=1";
    }
 
    ////게시판 호준
    @RequestMapping(value = "/toBoard") // 게시물 관리
    public String toBoard(int curPage, Model model) throws Exception{
-      System.out.println("curPage : "+curPage);
-      System.out.println("게시물 관리 페이지");
+
 
       // board curPage로 자라서 list 가져오기
   List<BoardDTO> list = service.selectBoard(curPage*10-9, curPage*10);
@@ -177,7 +178,7 @@ public class AdminController {
 	 int group_boardCnt = service.selectGroupBoardCount();
 
 	 int totalCnt = boardCnt + group_boardCnt;
-	 System.out.println(totalCnt);
+
 	 model.addAttribute("totalCnt",totalCnt);
 
 	 // 페이지 네이션
@@ -189,7 +190,7 @@ public class AdminController {
    @RequestMapping(value = "/generalBoard") // 일반 게시판 조회
    @ResponseBody
    public List<BoardDTO> genalBoard(int curPage) throws Exception {
-      System.out.println("일반 게시판 도착");
+
       List<BoardDTO> selectAllBoard = service.selectAllBoard();
       return selectAllBoard;
    }
@@ -227,7 +228,7 @@ public class AdminController {
    @RequestMapping(value = "/meetingSearch") // 모임 게시판 검색
    @ResponseBody
    public List<Group_BoardDTO> meetingSearch(String category, String keyword) throws Exception {
-      System.out.println(category + " : "+ keyword);
+
       if(category.equals("board_title")) {
          category = "gboard_title";
       }else if(category.equals("board_category")) {
